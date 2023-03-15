@@ -19,7 +19,9 @@ ___
 
 <!--- #################### mudar imagem exemplo #################### --->
 ___
-> This is a NextJS template made with linters and patterns.
+
+> This is the API from Beeus.
+
 ___
 ## 💻 Prerequisites
 
