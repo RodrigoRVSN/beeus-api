@@ -5,7 +5,7 @@ import (
 	"log"
 	"os"
 
-	"github.com/rodrigorvsn/beeus-api/src/domain/entities/user"
+	"github.com/rodrigoRVSN/beeus-api/src/domain/entities"
 	"gorm.io/driver/postgres"
 	"gorm.io/gorm"
 	"gorm.io/gorm/logger"
@@ -38,5 +38,9 @@ func ConnectDb() {
 	database.Logger = logger.Default.LogMode(logger.Info)
 
 	log.Println("😎 Running migrations...")
-	database.AutoMigrate(&user.Fact{})
+	database.AutoMigrate(&entities.User{})
+
+	DB = DbInstance{
+		Db: database,
+	}
 }
