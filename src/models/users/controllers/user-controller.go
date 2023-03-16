@@ -13,3 +13,17 @@ func ListUsers(context *fiber.Ctx) error {
 
 	return context.Status(200).JSON(users)
 }
+
+func CreateUser(context *fiber.Ctx) error {
+	user := new(entities.User)
+
+	if err := context.BodyParser(user); err != nil {
+		return context.Status(fiber.StatusInternalServerError).JSON(fiber.Map{
+			"message": err.Error(),
+		})
+	}
+
+	database.DB.Db.Create(&user)
+
+	return context.Status(200).JSON(user)
+}
