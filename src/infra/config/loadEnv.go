@@ -1,4 +1,4 @@
-package loadEnv
+package configs
 
 import (
 	"log"

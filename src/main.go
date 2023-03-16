@@ -4,20 +4,18 @@ import (
 	"os"
 
 	"github.com/gofiber/fiber/v2"
-	database "github.com/rodrigoRVSN/beeus-api/src/infra"
-	loadEnv "github.com/rodrigoRVSN/beeus-api/src/infra/config"
+	configs "github.com/rodrigoRVSN/beeus-api/src/infra/config"
+	routes "github.com/rodrigoRVSN/beeus-api/src/infra/router"
 )
 
 func main() {
-	loadEnv.LoadEnv()
+	configs.LoadEnv()
 
-	database.ConnectDb()
+	configs.ConnectDb()
 
 	app := fiber.New()
 
-	app.Get("/", func(context *fiber.Ctx) error {
-		return context.SendString("vasdjiasdhasioasdioasdjioasdjioasdjiopasj")
-	})
+	routes.SetupRoutes(app)
 
 	app.Listen(":" + os.Getenv("PORT"))
 }
