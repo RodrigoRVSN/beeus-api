@@ -4,7 +4,7 @@ import (
 	"github.com/gofiber/fiber/v2"
 	database "github.com/rodrigoRVSN/beeus-api/src/infra/config"
 	"github.com/rodrigoRVSN/beeus-api/src/models/users/entities"
-	CreateUserValidation "github.com/rodrigoRVSN/beeus-api/src/models/users/validations"
+	userService "github.com/rodrigoRVSN/beeus-api/src/models/users/services"
 )
 
 func ListUsers(context *fiber.Ctx) error {
@@ -24,13 +24,9 @@ func CreateUser(context *fiber.Ctx) error {
 		})
 	}
 
-	errors := CreateUserValidation.ValidateStruct(*user)
-
-	if errors != nil {
-		return context.Status(fiber.StatusBadRequest).JSON(errors)
+	if err := userService.CreateUserService(user); err != nil {
+		return context.Status(fiber.StatusBadRequest).JSON(err)
 	}
-
-	database.DB.Db.Create(&user)
 
 	return context.Status(fiber.StatusCreated).SendString("User registered!")
 }
