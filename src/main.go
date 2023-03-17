@@ -1,17 +1,21 @@
 package main
 
 import (
+	"os"
+
 	"github.com/gofiber/fiber/v2"
-	database "github.com/rodrigoRVSN/beeus-api/src/infra/config"
+	configs "github.com/rodrigoRVSN/beeus-api/src/infra/config"
 	routes "github.com/rodrigoRVSN/beeus-api/src/infra/router"
 )
 
 func main() {
-	database.ConnectDb()
+	configs.LoadEnv()
+
+	configs.ConnectDb()
 
 	app := fiber.New()
 
 	routes.SetupRoutes(app)
 
-	app.Listen(":4444")
+	app.Listen(":" + os.Getenv("PORT"))
 }
