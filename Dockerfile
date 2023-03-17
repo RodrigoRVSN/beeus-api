@@ -7,3 +7,7 @@ RUN go install github.com/cosmtrek/air@latest
 COPY . /usr/src/beeus-api
 
 RUN go mod tidy
+
+RUN go mod vendor
+
+RUN go run ./src/main.go

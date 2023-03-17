@@ -1,9 +1,10 @@
 package main
 
 import (
+	"os"
+
 	"github.com/gofiber/fiber/v2"
 	database "github.com/rodrigoRVSN/beeus-api/src/infra"
-	"os"
 )
 
 func main() {
@@ -15,5 +16,5 @@ func main() {
 		return context.SendString("vasdjiasdhasioasdioasdjioasdjioasdjiopasj")
 	})
 
-	app.Listen(":%s", os.Getenv("PORT"))
+	app.Listen(":" + os.Getenv("PORT"))
 }
