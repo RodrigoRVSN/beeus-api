@@ -15,7 +15,7 @@ import (
 	"github.com/rodrigoRVSN/beeus-api/src/models/users/entities"
 )
 
-func CreateUserService(payload *entities.User) error {
+func CreateUser(payload *entities.User) error {
 	errors := fieldsValidator.ValidateStruct(payload)
 
 	if errors != nil {

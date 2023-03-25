@@ -26,7 +26,7 @@ func CreateUser(context *fiber.Ctx) error {
 		return context.Status(fiber.StatusBadRequest).JSON(fiber.Map{"status": "fail", "message": err.Error()})
 	}
 
-	if err := userService.CreateUserService(payload); err != nil {
+	if err := userService.CreateUser(payload); err != nil {
 		return context.Status(fiber.StatusBadRequest).JSON(err)
 	}
 
