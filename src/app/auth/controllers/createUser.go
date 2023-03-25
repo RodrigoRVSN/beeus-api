@@ -2,7 +2,7 @@ package authController
 
 import (
 	"github.com/gofiber/fiber/v2"
-	userService "github.com/rodrigoRVSN/beeus-api/src/app/auth/services"
+	authService "github.com/rodrigoRVSN/beeus-api/src/app/auth/services"
 	"github.com/rodrigoRVSN/beeus-api/src/app/users/entities"
 )
 
@@ -13,7 +13,7 @@ func CreateUser(context *fiber.Ctx) error {
 		return context.Status(fiber.StatusBadRequest).JSON(fiber.Map{"status": "fail", "message": err.Error()})
 	}
 
-	if err := userService.CreateUser(payload); err != nil {
+	if err := authService.CreateUser(payload); err != nil {
 		return context.Status(fiber.StatusBadRequest).JSON(err)
 	}
 

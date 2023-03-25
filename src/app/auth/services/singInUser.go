@@ -8,14 +8,14 @@ import (
 	"time"
 
 	"github.com/golang-jwt/jwt"
-	userDtos "github.com/rodrigoRVSN/beeus-api/src/app/auth/dtos"
+	authDtos "github.com/rodrigoRVSN/beeus-api/src/app/auth/dtos"
 	"github.com/rodrigoRVSN/beeus-api/src/app/users/entities"
 	database "github.com/rodrigoRVSN/beeus-api/src/infra/config"
 	hash "github.com/rodrigoRVSN/beeus-api/src/infra/helpers"
 	fieldsValidator "github.com/rodrigoRVSN/beeus-api/src/infra/helpers/validator"
 )
 
-func SignInUser(payload *userDtos.SignInInput) (*userDtos.SignInOutput, error) {
+func SignInUser(payload *authDtos.SignInInput) (*authDtos.SignInOutput, error) {
 	errors := fieldsValidator.ValidateStruct(payload)
 
 	if errors != nil {
@@ -48,7 +48,7 @@ func SignInUser(payload *userDtos.SignInInput) (*userDtos.SignInOutput, error) {
 		return nil, fmt.Errorf("erro ao gerar token JWT: %v", err)
 	}
 
-	return &userDtos.SignInOutput{
+	return &authDtos.SignInOutput{
 		Token: tokenString,
 		Email: user.Email,
 		Name:  user.Name,
