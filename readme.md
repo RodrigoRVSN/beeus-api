@@ -12,7 +12,8 @@ ___
 <!--- #################### mudar badges #################### --->
 
 - Database ERD
-> todo
+
+![image](https://user-images.githubusercontent.com/75763403/227735098-709815a6-3b96-4f07-bee6-8a555de5b349.png)
 
 - Fluxogram
 > todo
