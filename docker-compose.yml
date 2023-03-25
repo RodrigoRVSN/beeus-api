@@ -1,16 +1,6 @@
 version: '3.8'
 
 services:
-  server:
-    build: .
-    env_file:
-      - .env
-    ports:
-      - "4444:4444"
-    volumes:
-      - .:/usr/src/beeus-api
-    command: air ./src/main.go
-    
   db:
     image: postgres:alpine
     environment:
@@ -21,6 +11,17 @@ services:
       - "5432:5432"
     volumes:
       - postgres-db:/var/lib/postgresql/data
+      
+  server:
+    build: .
+    env_file:
+      - .env
+    ports:
+      - "4444:4444"
+    volumes:
+      - .:/usr/src/beeus-api
+    command: air ./src/main.go
+    
 
 volumes:
   postgres-db:

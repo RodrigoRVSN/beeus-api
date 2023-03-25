@@ -36,7 +36,9 @@ ___
 - Fiber
 - Docker
 - PostgreSQL
-- _Maybe_ Swagger, Terraform, Azure Pipelines, Redis and OAuth 2
+- Render (Deploy server)
+- ElephantSQL (Deploy PostgreSQL database)
+- _Maybe_ Swagger, Terraform, Redis and OAuth 2
 
 <!--- #################### mudar ferramentas #################### --->
 ___
@@ -44,9 +46,9 @@ ___
 
 To use, follow the steps:
 
-```bash
-docker compose build
-```
+1. Fill the `.env` with the `.env.example` info.
+
+2. Build the server and database images to run the application of `docker-compose.yaml`
 
 ```bash
 docker compose up
