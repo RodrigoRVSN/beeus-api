@@ -15,6 +15,38 @@ import (
 	fieldsValidator "github.com/rodrigoRVSN/beeus-api/src/infra/helpers/validator"
 )
 
+func createJwtToken(userID uint) (string, error) {
+	now := time.Now().UTC()
+	expiredIn, _ := strconv.Atoi(os.Getenv("JWT_EXPIRES_IN"))
+	expirationTime := now.Add(time.Duration(expiredIn))
+
+	claims := jwt.MapClaims{
+		"sub": userID,
+		"exp": expirationTime.Unix(),
+		"iat": now.Unix(),
+		"nbf": now.Unix(),
+	}
+
+	token := jwt.NewWithClaims(jwt.SigningMethodHS256, claims)
+	tokenString, err := token.SignedString([]byte(os.Getenv("JWT_SECRET")))
+
+	if err != nil {
+		return "", err
+	}
+
+	return tokenString, nil
+}
+
+func findUserByEmail(email string) (*entities.User, error) {
+	var user entities.User
+
+	if err := database.DB.First(&user, "email = ?", email).Error; err != nil {
+		return nil, err
+	}
+
+	return &user, nil
+}
+
 func SignInUser(payload *authDtos.SignInInput) (*authDtos.SignInOutput, error) {
 	errors := fieldsValidator.ValidateStruct(payload)
 
@@ -22,27 +54,14 @@ func SignInUser(payload *authDtos.SignInInput) (*authDtos.SignInOutput, error) {
 		return nil, errors
 	}
 
-	var user entities.User
-	result := database.DB.First(&user, "email = ?", strings.ToLower(payload.Email))
+	user, err := findUserByEmail(strings.ToLower(payload.Email))
 	isPasswordCorrect := hash.CheckPasswordHash(payload.Password, user.Password)
 
-	if result.Error != nil || !isPasswordCorrect {
+	if err != nil || !isPasswordCorrect {
 		return nil, fmt.Errorf("email ou senha incorretos")
 	}
 
-	tokenByte := jwt.New(jwt.SigningMethodHS256)
-
-	now := time.Now().UTC()
-	claims := tokenByte.Claims.(jwt.MapClaims)
-
-	expiredIn, _ := strconv.Atoi(os.Getenv("JWT_EXPIRES_IN"))
-
-	claims["sub"] = user.ID
-	claims["exp"] = now.Add(time.Duration(expiredIn)).Unix()
-	claims["iat"] = now.Unix()
-	claims["nbf"] = now.Unix()
-
-	tokenString, err := tokenByte.SignedString([]byte(os.Getenv("JWT_SECRET")))
+	tokenString, err := createJwtToken(user.ID)
 
 	if err != nil {
 		return nil, fmt.Errorf("erro ao gerar token JWT: %v", err)
