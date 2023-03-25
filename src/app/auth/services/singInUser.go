@@ -23,7 +23,7 @@ func SignInUser(payload *userDtos.SignInInput) (*userDtos.SignInOutput, error) {
 	}
 
 	var user entities.User
-	result := database.DB.Db.First(&user, "email = ?", strings.ToLower(payload.Email))
+	result := database.DB.First(&user, "email = ?", strings.ToLower(payload.Email))
 	isPasswordCorrect := hash.CheckPasswordHash(payload.Password, user.Password)
 
 	if result.Error != nil || !isPasswordCorrect {

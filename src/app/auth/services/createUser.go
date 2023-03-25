@@ -16,7 +16,7 @@ func CreateUser(payload *entities.User) error {
 
 	payload.Password = hash.HashPassword(payload.Password)
 
-	database.DB.Db.Create(&payload)
+	database.DB.Create(&payload)
 
 	return nil
 }

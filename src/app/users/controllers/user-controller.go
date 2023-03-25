@@ -9,7 +9,7 @@ import (
 func ListUsers(context *fiber.Ctx) error {
 	users := []entities.User{}
 
-	database.DB.Db.Find(&users)
+	database.DB.Find(&users)
 
 	return context.Status(200).JSON(users)
 }
