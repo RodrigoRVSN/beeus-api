@@ -1,9 +1,9 @@
-package userController
+package authController
 
 import (
 	"github.com/gofiber/fiber/v2"
-	"github.com/rodrigoRVSN/beeus-api/src/models/users/entities"
-	userService "github.com/rodrigoRVSN/beeus-api/src/models/users/services"
+	userService "github.com/rodrigoRVSN/beeus-api/src/app/auth/services"
+	"github.com/rodrigoRVSN/beeus-api/src/app/users/entities"
 )
 
 func CreateUser(context *fiber.Ctx) error {

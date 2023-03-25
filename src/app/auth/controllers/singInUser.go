@@ -1,12 +1,12 @@
-package userController
+package authController
 
 import (
 	"os"
 	"strconv"
 
 	"github.com/gofiber/fiber/v2"
-	userDtos "github.com/rodrigoRVSN/beeus-api/src/models/users/dtos"
-	userService "github.com/rodrigoRVSN/beeus-api/src/models/users/services"
+	userDtos "github.com/rodrigoRVSN/beeus-api/src/app/auth/dtos"
+	userService "github.com/rodrigoRVSN/beeus-api/src/app/auth/services"
 )
 
 func SignInUser(context *fiber.Ctx) error {

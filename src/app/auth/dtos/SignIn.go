@@ -1,4 +1,4 @@
-package userDtos
+package authDtos
 
 type SignInInput struct {
 	Email    string `json:"email" validate:"required"`

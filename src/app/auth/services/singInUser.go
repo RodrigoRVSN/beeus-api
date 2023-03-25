@@ -1,4 +1,4 @@
-package userService
+package authService
 
 import (
 	"fmt"
@@ -8,11 +8,11 @@ import (
 	"time"
 
 	"github.com/golang-jwt/jwt"
+	userDtos "github.com/rodrigoRVSN/beeus-api/src/app/auth/dtos"
+	"github.com/rodrigoRVSN/beeus-api/src/app/users/entities"
 	database "github.com/rodrigoRVSN/beeus-api/src/infra/config"
 	hash "github.com/rodrigoRVSN/beeus-api/src/infra/helpers"
 	fieldsValidator "github.com/rodrigoRVSN/beeus-api/src/infra/helpers/validator"
-	userDtos "github.com/rodrigoRVSN/beeus-api/src/models/users/dtos"
-	"github.com/rodrigoRVSN/beeus-api/src/models/users/entities"
 )
 
 func SignInUser(payload *userDtos.SignInInput) (*userDtos.SignInOutput, error) {

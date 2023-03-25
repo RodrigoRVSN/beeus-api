@@ -4,7 +4,7 @@ import (
 	"log"
 	"os"
 
-	"github.com/rodrigoRVSN/beeus-api/src/models/users/entities"
+	"github.com/rodrigoRVSN/beeus-api/src/app/users/entities"
 	"gorm.io/driver/postgres"
 	"gorm.io/gorm"
 	"gorm.io/gorm/logger"
