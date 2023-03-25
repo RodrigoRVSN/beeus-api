@@ -2,11 +2,11 @@
 
 <!--- https://shields.io --->
 
-![GitHub repo size](https://img.shields.io/github/repo-size/rodrigorvsn/chamber?style=for-the-badge)
-![GitHub language count](https://img.shields.io/github/languages/count/rodrigorvsn/chamber?style=for-the-badge)
-![GitHub forks](https://img.shields.io/github/forks/rodrigorvsn/chamber?style=for-the-badge)
-![Bitbucket open issues](https://img.shields.io/bitbucket/issues/rodrigorvsn/chamber?style=for-the-badge)
-![Bitbucket open pull requests](https://img.shields.io/bitbucket/pr-raw/rodrigorvsn/chamber?style=for-the-badge)
+![GitHub repo size](https://img.shields.io/github/repo-size/rodrigorvsn/beeus?style=for-the-badge)
+![GitHub language count](https://img.shields.io/github/languages/count/rodrigorvsn/beeus?style=for-the-badge)
+![GitHub forks](https://img.shields.io/github/forks/rodrigorvsn/beeus?style=for-the-badge)
+![Bitbucket open issues](https://img.shields.io/bitbucket/issues/rodrigorvsn/beeus?style=for-the-badge)
+![Bitbucket open pull requests](https://img.shields.io/bitbucket/pr-raw/rodrigorvsn/beeus?style=for-the-badge)
 
 ___
 <!--- #################### mudar badges #################### --->
@@ -42,7 +42,7 @@ ___
 
 <!--- #################### mudar ferramentas #################### --->
 ___
-## 🚀 Installing chamber
+## 🚀 Installing beeus
 
 To use, follow the steps:
 
@@ -54,9 +54,9 @@ To use, follow the steps:
 docker compose up
 ```
 
-## 📫 Contribuiting with chamber
+## 📫 Contribuiting with beeus
 
-To contribue with chamber, follow the steps:
+To contribue with beeus, follow the steps:
 
 1. Fork this repository.
 2. Create a branch: `git checkout -b <name_branch>`.
