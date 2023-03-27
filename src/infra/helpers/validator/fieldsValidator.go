@@ -1,9 +1,8 @@
-package CreateUserValidation
+package fieldsValidator
 
 import (
 	"fmt"
 
-	"github.com/rodrigoRVSN/beeus-api/src/models/users/entities"
 	"gopkg.in/go-playground/validator.v9"
 )
 
@@ -17,17 +16,9 @@ type ValidationError struct {
 	Errors []*ErrorResponse
 }
 
-var validate = validator.New()
+type messageByTagParam func(tag string) string
 
-func messageByTag(tag string) string {
-	switch tag {
-	case "required":
-		return "Esse campo é obrigatório"
-	case "email":
-		return "Email inválido"
-	}
-	return tag
-}
+var validate = validator.New()
 
 func (e *ErrorResponse) Error() string {
 	return fmt.Sprintf("%s: %s", e.FailedField, e.Tag)
@@ -41,7 +32,17 @@ func (e *ValidationError) Error() string {
 	return errorStr
 }
 
-func ValidateStruct(user entities.User) *ValidationError {
+func messageByTag(tag string) string {
+	switch tag {
+	case "required":
+		return "Esse campo é obrigatório"
+	case "email":
+		return "Email inválido"
+	}
+	return tag
+}
+
+func ValidateStruct(user interface{}) *ValidationError {
 	var errors []*ErrorResponse
 	err := validate.Struct(user)
 

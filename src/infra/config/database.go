@@ -4,17 +4,13 @@ import (
 	"log"
 	"os"
 
-	"github.com/rodrigoRVSN/beeus-api/src/models/users/entities"
+	"github.com/rodrigoRVSN/beeus-api/src/app/users/entities"
 	"gorm.io/driver/postgres"
 	"gorm.io/gorm"
 	"gorm.io/gorm/logger"
 )
 
-type DbInstance struct {
-	Db *gorm.DB
-}
-
-var DB DbInstance
+var DB *gorm.DB
 
 func ConnectDb() {
 	database, error := gorm.Open(postgres.Open(os.Getenv("DB_URL")), &gorm.Config{
@@ -32,7 +28,5 @@ func ConnectDb() {
 	log.Println("😎 Running migrations...")
 	database.AutoMigrate(&entities.User{})
 
-	DB = DbInstance{
-		Db: database,
-	}
+	DB = database
 }

@@ -9,11 +9,10 @@ import (
 )
 
 func main() {
-	configs.LoadEnv()
-
-	configs.ConnectDb()
-
 	app := fiber.New()
+
+	configs.LoadEnv()
+	configs.ConnectDb()
 
 	routes.SetupRoutes(app)
 
