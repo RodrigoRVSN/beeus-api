@@ -1,9 +1,12 @@
-FROM golang:1.19.0
-
-WORKDIR /usr/src/beeus-api
+# Builder stage
+FROM golang:alpine AS builder
 
 RUN go install github.com/cosmtrek/air@latest
 
-COPY . /usr/src/beeus-api
+WORKDIR /app
 
-RUN go mod tidy
+COPY go.mod ./
+COPY go.sum ./
+RUN go mod download
+
+COPY . ./

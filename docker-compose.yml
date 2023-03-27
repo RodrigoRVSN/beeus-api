@@ -22,7 +22,6 @@ services:
       - .:/usr/src/beeus-api
     command: air ./src/main.go
     
-
 volumes:
   postgres-db:
     
