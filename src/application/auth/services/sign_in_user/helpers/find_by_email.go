@@ -1,8 +1,8 @@
 package authService
 
 import (
+	database "github.com/rodrigoRVSN/beeus-api/src/config"
 	"github.com/rodrigoRVSN/beeus-api/src/domain/entity"
-	database "github.com/rodrigoRVSN/beeus-api/src/infra/config"
 )
 
 func FindUserByEmail(email string) (*entity.User, error) {

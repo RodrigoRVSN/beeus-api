@@ -2,8 +2,8 @@ package userController
 
 import (
 	"github.com/gofiber/fiber/v2"
+	database "github.com/rodrigoRVSN/beeus-api/src/config"
 	"github.com/rodrigoRVSN/beeus-api/src/domain/entity"
-	database "github.com/rodrigoRVSN/beeus-api/src/infra/config"
 )
 
 func ListUsers(context *fiber.Ctx) error {

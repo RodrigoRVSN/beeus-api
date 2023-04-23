@@ -1,8 +1,8 @@
 package authService
 
 import (
+	database "github.com/rodrigoRVSN/beeus-api/src/config"
 	"github.com/rodrigoRVSN/beeus-api/src/domain/entity"
-	database "github.com/rodrigoRVSN/beeus-api/src/infra/config"
 	hash "github.com/rodrigoRVSN/beeus-api/src/infra/helpers"
 	fieldsValidator "github.com/rodrigoRVSN/beeus-api/src/infra/helpers/validator"
 )

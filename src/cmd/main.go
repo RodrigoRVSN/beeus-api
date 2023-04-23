@@ -4,15 +4,14 @@ import (
 	"os"
 
 	"github.com/gofiber/fiber/v2"
-	configs "github.com/rodrigoRVSN/beeus-api/src/infra/config"
+	"github.com/rodrigoRVSN/beeus-api/src/config"
 	routes "github.com/rodrigoRVSN/beeus-api/src/infra/router"
 )
 
 func main() {
 	app := fiber.New()
 
-	configs.LoadEnv()
-	configs.ConnectDb()
+	config.LoadConfig()
 
 	routes.SetupRoutes(app)
 

@@ -20,7 +20,7 @@ services:
       - "4444:4444"
     volumes:
       - .:/usr/src/beeus-api
-    command: air ./src/main.go
+    command: air ./src/cmd/main.go
 
 volumes:
   postgres-db:
