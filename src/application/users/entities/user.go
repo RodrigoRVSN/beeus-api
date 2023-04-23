@@ -2,12 +2,10 @@ package entities
 
 import (
 	"time"
-
-	"gorm.io/gorm"
 )
 
 type User struct {
-	gorm.Model
+	Id        uint      `json:"id" gorm:"primary_key"`
 	Name      string    `json:"name" validate:"required"`
 	Email     string    `json:"email" validate:"required,email"`
 	AvatarUrl string    `json:"avatar_url" gorm:"default:https://avatarfiles.alphacoders.com/260/thumb-260445.jpg"`

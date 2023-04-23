@@ -1,7 +1,7 @@
 package authService
 
 import (
-	"github.com/rodrigoRVSN/beeus-api/src/app/users/entities"
+	"github.com/rodrigoRVSN/beeus-api/src/application/users/entities"
 	database "github.com/rodrigoRVSN/beeus-api/src/infra/config"
 )
 

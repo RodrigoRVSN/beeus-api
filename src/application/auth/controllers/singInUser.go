@@ -5,8 +5,8 @@ import (
 	"strconv"
 
 	"github.com/gofiber/fiber/v2"
-	authDtos "github.com/rodrigoRVSN/beeus-api/src/app/auth/dtos"
-	authService "github.com/rodrigoRVSN/beeus-api/src/app/auth/services/signInUser"
+	authDtos "github.com/rodrigoRVSN/beeus-api/src/application/auth/dtos"
+	authService "github.com/rodrigoRVSN/beeus-api/src/application/auth/services/signInUser"
 )
 
 func injectTokenCookie(context *fiber.Ctx, user *authDtos.SignInOutput) {

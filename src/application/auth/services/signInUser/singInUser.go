@@ -4,8 +4,8 @@ import (
 	"fmt"
 	"strings"
 
-	authDtos "github.com/rodrigoRVSN/beeus-api/src/app/auth/dtos"
-	helpers "github.com/rodrigoRVSN/beeus-api/src/app/auth/services/signInUser/helpers"
+	authDtos "github.com/rodrigoRVSN/beeus-api/src/application/auth/dtos"
+	helpers "github.com/rodrigoRVSN/beeus-api/src/application/auth/services/signInUser/helpers"
 	hash "github.com/rodrigoRVSN/beeus-api/src/infra/helpers"
 	fieldsValidator "github.com/rodrigoRVSN/beeus-api/src/infra/helpers/validator"
 )
@@ -24,7 +24,7 @@ func SignInUser(payload *authDtos.SignInInput) (*authDtos.SignInOutput, error) {
 		return nil, fmt.Errorf("email ou senha incorretos")
 	}
 
-	tokenString, err := helpers.CreateJwtToken(user.ID)
+	tokenString, err := helpers.CreateJwtToken(user.Id)
 
 	if err != nil {
 		return nil, fmt.Errorf("erro ao gerar token JWT: %v", err)

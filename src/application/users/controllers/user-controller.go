@@ -2,7 +2,7 @@ package userController
 
 import (
 	"github.com/gofiber/fiber/v2"
-	"github.com/rodrigoRVSN/beeus-api/src/app/users/entities"
+	"github.com/rodrigoRVSN/beeus-api/src/application/users/entities"
 	database "github.com/rodrigoRVSN/beeus-api/src/infra/config"
 )
 
