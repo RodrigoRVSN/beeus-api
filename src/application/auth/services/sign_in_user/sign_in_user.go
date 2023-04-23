@@ -5,7 +5,7 @@ import (
 	"strings"
 
 	authDtos "github.com/rodrigoRVSN/beeus-api/src/application/auth/dtos"
-	helpers "github.com/rodrigoRVSN/beeus-api/src/application/auth/services/signInUser/helpers"
+	helpers "github.com/rodrigoRVSN/beeus-api/src/application/auth/services/sign_in_user/helpers"
 	hash "github.com/rodrigoRVSN/beeus-api/src/infra/helpers"
 	fieldsValidator "github.com/rodrigoRVSN/beeus-api/src/infra/helpers/validator"
 )
