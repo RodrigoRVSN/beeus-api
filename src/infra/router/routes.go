@@ -2,11 +2,14 @@ package routes
 
 import (
 	"github.com/gofiber/fiber/v2"
+	"github.com/gofiber/fiber/v2/middleware/cors"
 	authController "github.com/rodrigoRVSN/beeus-api/src/app/auth/controllers"
 	userController "github.com/rodrigoRVSN/beeus-api/src/app/users/controllers"
 )
 
 func SetupRoutes(app *fiber.App) {
+	app.Use(cors.New())
+
 	app.Get("/users", userController.ListUsers)
 
 	app.Post("/auth/register", authController.CreateUser)
