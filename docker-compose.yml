@@ -4,14 +4,14 @@ services:
   db:
     image: postgres:alpine
     environment:
+      - POSTGRES_DB=beeus
       - POSTGRES_USER=root
       - POSTGRES_PASSWORD=root
-      - POSTGRES_DB=root
     ports:
       - "5432:5432"
     volumes:
       - postgres-db:/var/lib/postgresql/data
-      
+
   server:
     build: .
     env_file:
@@ -21,7 +21,6 @@ services:
     volumes:
       - .:/usr/src/beeus-api
     command: air ./src/main.go
-    
+
 volumes:
   postgres-db:
-    
