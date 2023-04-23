@@ -3,15 +3,17 @@ package routes
 import (
 	"github.com/gofiber/fiber/v2"
 	"github.com/gofiber/fiber/v2/middleware/cors"
-	authController "github.com/rodrigoRVSN/beeus-api/src/application/auth/controllers"
-	userController "github.com/rodrigoRVSN/beeus-api/src/application/users/controllers"
+	userController "github.com/rodrigoRVSN/beeus-api/src/application/controller/user"
+	userUseCase "github.com/rodrigoRVSN/beeus-api/src/application/use_case/user"
 )
 
-func SetupRoutes(app *fiber.App) {
+func SetupRoutes(app *fiber.App, uc *userUseCase.CreateUserUseCase) {
 	app.Use(cors.New())
 
-	app.Get("/users", userController.ListUsers)
+	userHandler := userController.NewUserController(*uc)
 
-	app.Post("/auth/register", authController.CreateUser)
-	app.Post("/auth/login", authController.SignInUser)
+	app.Get("/users", userHandler.FindAllUsers)
+
+	app.Post("/auth/login", userHandler.SignInUser)
+	app.Post("/auth/register", userHandler.CreateUser)
 }

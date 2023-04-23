@@ -1,32 +1,16 @@
 package config
 
 import (
-	"log"
-	"os"
-
-	"github.com/rodrigoRVSN/beeus-api/src/domain/entity"
-	"gorm.io/driver/postgres"
+	"github.com/rodrigoRVSN/beeus-api/src/infra/db"
 	"gorm.io/gorm"
-	"gorm.io/gorm/logger"
 )
 
-var DB *gorm.DB
-
-func ConnectDb() {
-	database, error := gorm.Open(postgres.Open(os.Getenv("DB_URL")), &gorm.Config{
-		Logger: logger.Default.LogMode(logger.Info),
-	})
+func ConnectDb() *gorm.DB {
+	database, error := db.NewDatabase()
 
 	if error != nil {
-		log.Fatal("⚠️ Failed to connect to database!\n", error)
-		os.Exit(1)
+		panic(error)
 	}
 
-	log.Println("🔥 Database connected!\n", database)
-	database.Logger = logger.Default.LogMode(logger.Info)
-
-	log.Println("😎 Running migrations...")
-	database.AutoMigrate(&entity.User{})
-
-	DB = database
+	return database.GetDB()
 }
