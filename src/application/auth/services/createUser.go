@@ -1,13 +1,13 @@
 package authService
 
 import (
-	"github.com/rodrigoRVSN/beeus-api/src/application/users/entities"
+	"github.com/rodrigoRVSN/beeus-api/src/domain/entity"
 	database "github.com/rodrigoRVSN/beeus-api/src/infra/config"
 	hash "github.com/rodrigoRVSN/beeus-api/src/infra/helpers"
 	fieldsValidator "github.com/rodrigoRVSN/beeus-api/src/infra/helpers/validator"
 )
 
-func CreateUser(payload *entities.User) error {
+func CreateUser(payload *entity.User) error {
 	errors := fieldsValidator.ValidateStruct(payload)
 
 	if errors != nil {

@@ -3,11 +3,11 @@ package authController
 import (
 	"github.com/gofiber/fiber/v2"
 	authService "github.com/rodrigoRVSN/beeus-api/src/application/auth/services"
-	"github.com/rodrigoRVSN/beeus-api/src/application/users/entities"
+	"github.com/rodrigoRVSN/beeus-api/src/domain/entity"
 )
 
 func CreateUser(context *fiber.Ctx) error {
-	payload := new(entities.User)
+	payload := new(entity.User)
 
 	if err := context.BodyParser(&payload); err != nil {
 		return context.Status(fiber.StatusBadRequest).JSON(fiber.Map{"status": "fail", "message": err.Error()})

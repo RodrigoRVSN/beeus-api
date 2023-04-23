@@ -2,12 +2,12 @@ package userController
 
 import (
 	"github.com/gofiber/fiber/v2"
-	"github.com/rodrigoRVSN/beeus-api/src/application/users/entities"
+	"github.com/rodrigoRVSN/beeus-api/src/domain/entity"
 	database "github.com/rodrigoRVSN/beeus-api/src/infra/config"
 )
 
 func ListUsers(context *fiber.Ctx) error {
-	users := []entities.User{}
+	users := []entity.User{}
 
 	database.DB.Find(&users)
 
