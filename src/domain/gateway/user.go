@@ -6,8 +6,9 @@ import (
 )
 
 type UserGateway interface {
-	GetUserByEmail(payload *entity.User, email string) error
-	CreateUser(payload *entity.User) error
+	CheckIfUserAlreadyExists(payload dto.SignUpInputDTO, email string) error
+	CreateUser(payload dto.SignUpInputDTO) error
 	SignInUser(payload dto.SignInInputDTO) (*dto.SignInOutputDTO, error)
+	// TODO: The FindAllUsers method is just a health check and will be removed soon. The architecture is not following the patterns because it doesnt matters for now.
 	FindAllUsers(user *entity.User) ([]entity.User, error)
 }

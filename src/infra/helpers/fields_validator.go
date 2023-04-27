@@ -1,4 +1,4 @@
-package fieldsValidator
+package helpers
 
 import (
 	"fmt"
@@ -15,8 +15,6 @@ type ErrorResponse struct {
 type ValidationError struct {
 	Errors []*ErrorResponse
 }
-
-type messageByTagParam func(tag string) string
 
 var validate = validator.New()
 

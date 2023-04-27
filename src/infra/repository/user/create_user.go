@@ -3,12 +3,12 @@ package userRepository
 import (
 	"errors"
 
-	"github.com/rodrigoRVSN/beeus-api/src/domain/entity"
+	"github.com/rodrigoRVSN/beeus-api/src/application/dto"
 	hash "github.com/rodrigoRVSN/beeus-api/src/infra/helpers"
 	"gorm.io/gorm"
 )
 
-func (r *UserRepository) GetUserByEmail(payload *entity.User, email string) error {
+func (r *UserRepository) CheckIfUserAlreadyExists(payload dto.SignUpInputDTO, email string) error {
 	if err := r.DB.First(payload, "email = ?", email).Error; err != nil {
 		if errors.Is(err, gorm.ErrRecordNotFound) {
 			return nil
@@ -18,7 +18,7 @@ func (r *UserRepository) GetUserByEmail(payload *entity.User, email string) erro
 	return errors.New("houve um erro ao cadastrar o email")
 }
 
-func (r *UserRepository) CreateUser(payload *entity.User) error {
+func (r *UserRepository) CreateUser(payload dto.SignUpInputDTO) error {
 	payload.Password = hash.HashPassword(payload.Password)
 
 	response := r.DB.Create(payload)

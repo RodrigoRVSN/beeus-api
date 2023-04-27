@@ -3,7 +3,7 @@ package userController
 import (
 	"github.com/gofiber/fiber/v2"
 	"github.com/rodrigoRVSN/beeus-api/src/application/dto"
-	fieldsValidator "github.com/rodrigoRVSN/beeus-api/src/infra/helpers/validator"
+	fieldsValidator "github.com/rodrigoRVSN/beeus-api/src/infra/helpers"
 )
 
 func (controller *UserController) SignInUser(context *fiber.Ctx) error {
