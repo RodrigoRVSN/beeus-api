@@ -24,11 +24,6 @@ jobs:
       - name: 🧪 Test
         run: go test -v ./src/...
 
-      - name: 👔 Lint
-        uses: Jerome1337/golint-action@v1.0.2
-        with:
-          golint-path: './src/...'
-
       - name: Coverage
         uses: gwatts/go-coverage-action@v1
         id: coverage
