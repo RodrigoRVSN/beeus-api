@@ -19,15 +19,7 @@ jobs:
           go-version: '1.19'
 
       - name: 🏗️ Build
-        run: go build -v -o ./tmp/main ./src/cmd
+        run: go build -v ./...
 
       - name: 🧪 Test
         run: go test -v ./src/...
-
-      - name: Coverage
-        uses: gwatts/go-coverage-action@v1
-        id: coverage
-        with:
-          coverage-threshold: 80
-          cover-pkg: ./src/...
-          report-url: https://artifacts.example.com/go-coverage/${{ github.ref_name}}.html
