@@ -11,7 +11,7 @@ import (
 func CreateJwtToken(userID uint) (string, error) {
 	now := time.Now().UTC()
 	expiredIn, _ := strconv.Atoi(os.Getenv("JWT_EXPIRES_IN"))
-	expirationTime := now.Add(time.Duration(expiredIn))
+	expirationTime := now.Add(time.Hour * time.Duration(24*expiredIn))
 
 	claims := jwt.MapClaims{
 		"sub": userID,
