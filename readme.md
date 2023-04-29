@@ -55,6 +55,12 @@ To use, follow the steps:
 docker compose up
 ```
 
+3. Run all tests of the project recursively 
+
+```bash
+go test ./...
+```
+
 ## 📫 Contribuiting with beeus-api
 
 To contribue with beeus-api, follow the steps:
@@ -66,20 +72,3 @@ To contribue with beeus-api, follow the steps:
 5. Send the pull request.
 
 Alternatively, see the GitHub documentation at [how to create a pull request](https://help.github.com/en/github/collaborating-with-issues-and-pull-requests/creating-a-pull-request).
-___
-## 🤝 Contributors
-
-Made with ❤️ by:
-
-<table>
-  <tr>
-    <td align="center">
-      <a href="#">
-        <img src="https://github.com/rodrigorvsn.png" width="100px;" alt="Foto do Rodrigo Victor no GitHub"/><br>
-        <sub>
-          <b>Rodrigo Victor</b>
-        </sub>
-      </a>
-    </td>
-  </tr>
-</table>

@@ -30,12 +30,7 @@ func AuthMiddleware(c *fiber.Ctx) error {
 	})
 
 	if err != nil {
-		if err == jwt.ErrSignatureInvalid {
-			return c.Status(fiber.StatusUnauthorized).JSON(fiber.Map{
-				"message": "Token de autenticação inválido",
-			})
-		}
-		return c.Status(fiber.StatusBadRequest).JSON(fiber.Map{
+		return c.Status(fiber.StatusUnauthorized).JSON(fiber.Map{
 			"message": "Token de autenticação inválido",
 		})
 	}
