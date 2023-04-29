@@ -1,4 +1,4 @@
-name: ci
+name: CI/CD - Merge
 
 on:
   push:
@@ -13,6 +13,8 @@ jobs:
     steps:
       - name: 🏁 Checkout repository
         uses: actions/checkout@v3
+        with:
+          fetch-depth: 10
 
       - name: ⚙️ Set up Go
         uses: actions/setup-go@v4
@@ -20,7 +22,20 @@ jobs:
           go-version: '1.19'
 
       - name: 🏗️ Build
-        run: go build -v ./...
+        run: go build -v -o ./tmp/main ./src/cmd
 
       - name: 🧪 Test
-        run: go test -v ./...
+        run: go test -v ./src/...
+
+      - name: 👔 Lint
+        uses: Jerome1337/golint-action@v1.0.2
+        with:
+          golint-path: './src/...'
+
+      - name: Coverage
+        uses: gwatts/go-coverage-action@v1
+        id: coverage
+        with:
+          coverage-threshold: 80
+          cover-pkg: ./src/...
+          report-url: https://artifacts.example.com/go-coverage/${{ github.ref_name}}.html
