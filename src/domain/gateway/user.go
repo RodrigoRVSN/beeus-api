@@ -6,7 +6,7 @@ import (
 )
 
 type UserGateway interface {
-	CheckIfUserAlreadyExists(payload dto.SignUpInputDTO, email string) error
+	CheckIfUserAlreadyExists(email string) error
 	CreateUser(payload dto.SignUpInputDTO) error
 	SignInUser(payload dto.SignInInputDTO) (*dto.SignInOutputDTO, error)
 	GetUserById(userId uint) (*dto.FindUserByIdOutputDTO, error)

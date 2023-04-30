@@ -4,8 +4,8 @@ import (
 	"github.com/rodrigoRVSN/beeus-api/src/application/dto"
 )
 
-func (uc *CreateUserUseCase) CreateUser(payload dto.SignUpInputDTO) error {
-	userWasFound := uc.UserGateway.CheckIfUserAlreadyExists(payload, payload.Email)
+func (uc *UserUseCase) CreateUser(payload dto.SignUpInputDTO) error {
+	userWasFound := uc.UserGateway.CheckIfUserAlreadyExists(payload.Email)
 
 	if userWasFound != nil {
 		return userWasFound

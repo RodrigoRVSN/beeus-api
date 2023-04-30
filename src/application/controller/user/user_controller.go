@@ -5,10 +5,10 @@ import (
 )
 
 type UserController struct {
-	useCase userUseCase.CreateUserUseCase
+	useCase userUseCase.UserUseCase
 }
 
-func NewUserController(useCase userUseCase.CreateUserUseCase) *UserController {
+func NewUserController(useCase userUseCase.UserUseCase) *UserController {
 	return &UserController{
 		useCase: useCase,
 	}
