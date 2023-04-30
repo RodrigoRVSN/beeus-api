@@ -22,5 +22,11 @@ services:
       - .:/usr/src/beeus-api
     command: air ./src/cmd/main.go
 
+  test:
+    build: .
+    env_file:
+      - .env
+    command: go test ./...
+
 volumes:
   postgres-db:
