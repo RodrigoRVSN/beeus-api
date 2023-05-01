@@ -2,7 +2,7 @@ package documentationController
 
 import (
 	"github.com/gofiber/fiber/v2"
-	"github.com/rodrigoRVSN/beeus-api/src/application/dto/documentation"
+	documentationDTO "github.com/rodrigoRVSN/beeus-api/src/application/dto/documentation"
 	fieldsValidator "github.com/rodrigoRVSN/beeus-api/src/infra/helpers"
 )
 
@@ -20,11 +20,11 @@ func (controller *DocumentationController) CreateDocumentation(ctx *fiber.Ctx) e
 		return ctx.Status(fiber.StatusBadRequest).JSON(errors)
 	}
 
-	err := controller.useCase.CreateDocumentation(*payload, userID)
+	documentation, err := controller.useCase.CreateDocumentation(*payload, userID)
 
 	if err != nil {
 		return ctx.Status(fiber.StatusBadRequest).JSON(fiber.Map{"status": "fail", "message": err.Error()})
 	}
 
-	return ctx.Status(fiber.StatusCreated).SendString("Documentation registered!")
+	return ctx.Status(fiber.StatusCreated).JSON(documentation)
 }

@@ -1,21 +1,21 @@
 package documentationUseCase
 
 import (
-	"github.com/rodrigoRVSN/beeus-api/src/application/dto/documentation"
+	documentationDTO "github.com/rodrigoRVSN/beeus-api/src/application/dto/documentation"
 )
 
-func (uc *DocumentationUseCase) CreateDocumentation(payload documentationDTO.CreateDocumentationInputDTO, userID uint) error {
+func (uc *DocumentationUseCase) CreateDocumentation(payload documentationDTO.CreateDocumentationInputDTO, userID uint) (*documentationDTO.CreateDocumentationOutputDTO, error) {
 	user, userWasNotFound := uc.UserUseCase.GetUserById(userID)
 
 	if userWasNotFound != nil {
-		return userWasNotFound
+		return nil, userWasNotFound
 	}
 
-	err := uc.DocumentationGateway.CreateDocumentation(payload, user.Id)
+	documentation, err := uc.DocumentationGateway.CreateDocumentation(payload, user)
 
 	if err != nil {
-		return err
+		return nil, err
 	}
 
-	return nil
+	return documentation, err
 }
