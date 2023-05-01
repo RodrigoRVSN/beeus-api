@@ -40,9 +40,9 @@ func messageByTag(tag string) string {
 	return tag
 }
 
-func ValidateStruct(user interface{}) *ValidationError {
+func ValidateStruct(entity interface{}) *ValidationError {
 	var errors []*ErrorResponse
-	err := validate.Struct(user)
+	err := validate.Struct(entity)
 
 	if err != nil {
 		for _, err := range err.(validator.ValidationErrors) {

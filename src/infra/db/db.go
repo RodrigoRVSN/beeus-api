@@ -29,7 +29,7 @@ func NewDatabase() (*Database, error) {
 	database.Logger = logger.Default.LogMode(logger.Info)
 
 	log.Println("😎 Running migrations...")
-	database.AutoMigrate(&entity.User{})
+	database.AutoMigrate(&entity.User{}, &entity.Documentation{})
 
 	return &Database{db: database}, nil
 }

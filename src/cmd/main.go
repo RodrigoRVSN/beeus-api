@@ -26,7 +26,7 @@ func main() {
 	userController := userController.NewUserController(*userUseCase)
 
 	documentationRepository := documentationRepository.NewDocumentationRepository(db)
-	documentationUseCase := documentationUseCase.NewDocumentationUseCase(documentationRepository)
+	documentationUseCase := documentationUseCase.NewDocumentationUseCase(documentationRepository, userUseCase)
 	documentationController := documentationController.NewDocumentationController(*documentationUseCase)
 
 	app.Use(cors.New())
