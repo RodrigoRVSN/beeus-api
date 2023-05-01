@@ -10,6 +10,6 @@ type Documentation struct {
 	Content   string    `json:"content" validate:"required"`
 	CreatedAt time.Time `json:"created_at"`
 	UpdatedAt time.Time `json:"updated_at"`
-	UserID    uint      `json:"user_id"`
-	User      User      `gorm:"foreignKey:UserID;constraint:OnUpdate:CASCADE,OnDelete:SET NULL;"`
+	AuthorID  uint      `json:"author_id"`
+	Author    User      `gorm:"foreignKey:AuthorID;constraint:OnUpdate:CASCADE,OnDelete:SET NULL;"`
 }

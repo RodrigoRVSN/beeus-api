@@ -2,13 +2,13 @@ package documentationController
 
 import (
 	"github.com/gofiber/fiber/v2"
-	"github.com/rodrigoRVSN/beeus-api/src/application/dto"
+	"github.com/rodrigoRVSN/beeus-api/src/application/dto/documentation"
 	fieldsValidator "github.com/rodrigoRVSN/beeus-api/src/infra/helpers"
 )
 
 func (controller *DocumentationController) CreateDocumentation(ctx *fiber.Ctx) error {
 	userID := ctx.Locals("userId").(uint)
-	payload := new(dto.CreateDocumentationInputDTO)
+	payload := new(documentationDTO.CreateDocumentationInputDTO)
 
 	if err := ctx.BodyParser(&payload); err != nil {
 		return ctx.Status(fiber.StatusBadRequest).JSON(fiber.Map{"status": "fail", "message": err.Error()})

@@ -1,8 +1,8 @@
 package userUseCase
 
-import "github.com/rodrigoRVSN/beeus-api/src/application/dto"
+import userDTO "github.com/rodrigoRVSN/beeus-api/src/application/dto/user"
 
-func (uc *UserUseCase) Me(userId uint) (*dto.FindUserByIdOutputDTO, error) {
+func (uc *UserUseCase) Me(userId uint) (*userDTO.FindUserByIdOutputDTO, error) {
 	user, err := uc.UserGateway.GetUserById(userId)
 
 	if err != nil {

@@ -1,10 +1,8 @@
 package documentationUseCase
 
-import (
-	"github.com/rodrigoRVSN/beeus-api/src/domain/entity"
-)
+import documentationDTO "github.com/rodrigoRVSN/beeus-api/src/application/dto/documentation"
 
-func (uc *DocumentationUseCase) ListAllDocumentations() ([]entity.Documentation, error) {
+func (uc *DocumentationUseCase) ListAllDocumentations() ([]documentationDTO.ListDocumentationsOutputDTO, error) {
 	documentations, err := uc.DocumentationGateway.ListAllDocumentations()
 
 	if err != nil {

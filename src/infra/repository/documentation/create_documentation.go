@@ -1,15 +1,15 @@
 package documentationRepository
 
 import (
-	"github.com/rodrigoRVSN/beeus-api/src/application/dto"
+	documentationDTO "github.com/rodrigoRVSN/beeus-api/src/application/dto/documentation"
 	"github.com/rodrigoRVSN/beeus-api/src/domain/entity"
 )
 
-func (r *DocumentationRepository) CreateDocumentation(payload dto.CreateDocumentationInputDTO, userID uint) error {
+func (r *DocumentationRepository) CreateDocumentation(payload documentationDTO.CreateDocumentationInputDTO, userID uint) error {
 	documentation := entity.Documentation{
-		Title:   payload.Title,
-		Content: payload.Content,
-		UserID:  userID,
+		Title:    payload.Title,
+		Content:  payload.Content,
+		AuthorID: userID,
 	}
 
 	if err := r.DB.Create(&documentation).Error; err != nil {

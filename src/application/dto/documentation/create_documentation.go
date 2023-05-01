@@ -1,4 +1,4 @@
-package dto
+package documentationDTO
 
 type CreateDocumentationInputDTO struct {
 	Title   string `json:"title" validate:"required"`
