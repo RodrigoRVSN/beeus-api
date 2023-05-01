@@ -5,7 +5,7 @@ import (
 )
 
 func (controller *DocumentationController) ListAllDocumentations(context *fiber.Ctx) error {
-	documentations, err := controller.useCase.DocumentationGateway.ListAllDocumentations()
+	documentations, err := controller.useCase.ListAllDocumentations()
 
 	if err != nil {
 		return context.Status(fiber.StatusBadRequest).JSON(err)
