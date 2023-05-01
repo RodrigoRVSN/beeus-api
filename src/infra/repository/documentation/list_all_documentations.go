@@ -7,10 +7,8 @@ import (
 func (r *DocumentationRepository) ListAllDocumentations() ([]entity.Documentation, error) {
 	documentations := []entity.Documentation{}
 
-	response := r.DB.Find(&documentations)
-
-	if response.Error != nil {
-		return nil, response.Error
+	if err := r.DB.Preload("User").Find(&documentations).Error; err != nil {
+		return nil, err
 	}
 
 	return documentations, nil
