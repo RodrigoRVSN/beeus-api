@@ -1,10 +1,10 @@
 package userUseCase
 
 import (
-	"github.com/rodrigoRVSN/beeus-api/src/application/dto"
+	userDTO "github.com/rodrigoRVSN/beeus-api/src/application/dto/user"
 )
 
-func (uc *CreateUserUseCase) SignInUser(payload dto.SignInInputDTO) (*dto.SignInOutputDTO, error) {
+func (uc *UserUseCase) SignInUser(payload userDTO.SignInInputDTO) (*userDTO.SignInOutputDTO, error) {
 	user, err := uc.UserGateway.SignInUser(payload)
 
 	if err != nil {

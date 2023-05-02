@@ -4,12 +4,12 @@ import (
 	"github.com/rodrigoRVSN/beeus-api/src/domain/gateway"
 )
 
-type CreateUserUseCase struct {
+type UserUseCase struct {
 	UserGateway gateway.UserGateway
 }
 
-func NewUserUseCase(chatGateway gateway.UserGateway) *CreateUserUseCase {
-	return &CreateUserUseCase{
-		UserGateway: chatGateway,
+func NewUserUseCase(userGateway gateway.UserGateway) *UserUseCase {
+	return &UserUseCase{
+		UserGateway: userGateway,
 	}
 }

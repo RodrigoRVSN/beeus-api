@@ -2,7 +2,7 @@ package userUseCase
 
 import "github.com/rodrigoRVSN/beeus-api/src/domain/entity"
 
-func (uc *CreateUserUseCase) FindAllUsers(user *entity.User) ([]entity.User, error) {
+func (uc *UserUseCase) FindAllUsers(user *entity.User) ([]entity.User, error) {
 	users, err := uc.UserGateway.FindAllUsers(user)
 
 	if err != nil {

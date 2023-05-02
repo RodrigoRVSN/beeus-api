@@ -2,12 +2,12 @@ package userController
 
 import (
 	"github.com/gofiber/fiber/v2"
-	"github.com/rodrigoRVSN/beeus-api/src/application/dto"
+	"github.com/rodrigoRVSN/beeus-api/src/application/dto/user"
 	fieldsValidator "github.com/rodrigoRVSN/beeus-api/src/infra/helpers"
 )
 
 func (controller *UserController) CreateUser(context *fiber.Ctx) error {
-	payload := new(dto.SignUpInputDTO)
+	payload := new(userDTO.SignUpInputDTO)
 
 	if err := context.BodyParser(&payload); err != nil {
 		return context.Status(fiber.StatusBadRequest).JSON(fiber.Map{"status": "fail", "message": err.Error()})

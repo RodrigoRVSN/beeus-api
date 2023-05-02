@@ -3,28 +3,32 @@ package userRepository
 import (
 	"errors"
 
-	"github.com/rodrigoRVSN/beeus-api/src/application/dto"
+	userDTO "github.com/rodrigoRVSN/beeus-api/src/application/dto/user"
+	"github.com/rodrigoRVSN/beeus-api/src/domain/entity"
 	hash "github.com/rodrigoRVSN/beeus-api/src/infra/helpers"
-	"gorm.io/gorm"
 )
 
-func (r *UserRepository) CheckIfUserAlreadyExists(payload dto.SignUpInputDTO, email string) error {
-	if err := r.DB.First(payload, "email = ?", email).Error; err != nil {
-		if errors.Is(err, gorm.ErrRecordNotFound) {
-			return nil
-		}
-		return err
+func (r *UserRepository) CheckIfUserAlreadyExists(email string) error {
+	user := entity.User{}
+
+	result := r.DB.Where("email = ?", email).First(&user)
+	if result.RowsAffected > 0 {
+		return errors.New("houve um erro ao cadastrar o email")
 	}
-	return errors.New("houve um erro ao cadastrar o email")
+	return nil
 }
 
-func (r *UserRepository) CreateUser(payload dto.SignUpInputDTO) error {
+func (r *UserRepository) CreateUser(payload userDTO.SignUpInputDTO) error {
 	payload.Password = hash.HashPassword(payload.Password)
 
-	response := r.DB.Create(payload)
+	user := entity.User{
+		Name:     payload.Name,
+		Email:    payload.Email,
+		Password: payload.Password,
+	}
 
-	if response.Error != nil {
-		return response.Error
+	if err := r.DB.Create(&user).Error; err != nil {
+		return err
 	}
 
 	return nil

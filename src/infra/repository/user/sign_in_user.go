@@ -4,13 +4,13 @@ import (
 	"fmt"
 	"strings"
 
-	"github.com/rodrigoRVSN/beeus-api/src/application/dto"
+	userDTO "github.com/rodrigoRVSN/beeus-api/src/application/dto/user"
 	"github.com/rodrigoRVSN/beeus-api/src/domain/entity"
 	hash "github.com/rodrigoRVSN/beeus-api/src/infra/helpers"
 	"github.com/rodrigoRVSN/beeus-api/src/infra/service"
 )
 
-func (r *UserRepository) SignInUser(payload dto.SignInInputDTO) (*dto.SignInOutputDTO, error) {
+func (r *UserRepository) SignInUser(payload userDTO.SignInInputDTO) (*userDTO.SignInOutputDTO, error) {
 	user := entity.User{}
 
 	email := strings.ToLower(payload.Email)
@@ -28,7 +28,7 @@ func (r *UserRepository) SignInUser(payload dto.SignInInputDTO) (*dto.SignInOutp
 		return nil, fmt.Errorf("erro ao gerar token")
 	}
 
-	return &dto.SignInOutputDTO{
+	return &userDTO.SignInOutputDTO{
 		Token: tokenString,
 		Email: user.Email,
 		Name:  user.Name,

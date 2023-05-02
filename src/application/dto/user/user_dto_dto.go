@@ -1,8 +1,8 @@
-package dto
+package userDTO
 
 import "time"
 
-type FindUserByIdOutputDTO struct {
+type UserWithoutPasswordDTO struct {
 	Id        uint      `json:"id"`
 	Name      string    `json:"name"`
 	Email     string    `json:"email"`
