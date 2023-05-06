@@ -11,7 +11,7 @@ import (
 func (r *DocumentationRepository) FindDocumentationById(documentationId uint) (*documentationDTO.FindDocumentationByIdOutputDTO, error) {
 	documentation := entity.Documentation{}
 
-	if err := r.DB.First(&documentation, documentationId).Error; err != nil {
+	if err := r.DB.Preload("Author").Find(&documentation).Error; err != nil {
 		if err.Error() == "record not found" {
 			return nil, fmt.Errorf("documentação não encontrada")
 		}
