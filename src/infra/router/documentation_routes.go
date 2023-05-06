@@ -9,4 +9,5 @@ import (
 func DocumentationRoutes(app *fiber.App, documentationController *documentationController.DocumentationController) {
 	app.Get("/documentation", documentationController.ListAllDocumentations)
 	app.Post("/documentation", middleware.AuthMiddleware, documentationController.CreateDocumentation)
+	app.Delete("/documentation/:documentationId", middleware.AuthMiddleware, documentationController.DeleteDocumentation)
 }
