@@ -8,4 +8,6 @@ import (
 type DocumentationGateway interface {
 	CreateDocumentation(payload documentationDTO.CreateDocumentationInputDTO, user *userDTO.FindUserByIdOutputDTO) (*documentationDTO.CreateDocumentationOutputDTO, error)
 	ListAllDocumentations() ([]documentationDTO.ListDocumentationsOutputDTO, error)
+	DeleteDocumentation(documentation *documentationDTO.FindDocumentationByIdOutputDTO) error
+	FindDocumentationById(documentationId uint) (*documentationDTO.FindDocumentationByIdOutputDTO, error)
 }

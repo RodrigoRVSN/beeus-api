@@ -8,10 +8,8 @@ import (
 func (r *UserRepository) GetUserById(userId uint) (*userDTO.FindUserByIdOutputDTO, error) {
 	user := entity.User{}
 
-	response := r.DB.First(&user, userId)
-
-	if response.Error != nil {
-		return nil, response.Error
+	if err := r.DB.First(&user, userId).Error; err != nil {
+		return nil, err
 	}
 
 	return &userDTO.FindUserByIdOutputDTO{
