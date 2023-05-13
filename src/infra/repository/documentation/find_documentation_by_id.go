@@ -12,7 +12,7 @@ import (
 func (r *DocumentationRepository) FindDocumentationById(documentationId uint) (*documentationDTO.FindDocumentationByIdOutputDTO, error) {
 	documentation := entity.Documentation{}
 
-	if err := r.DB.Preload("Author").First(&documentation, documentationId).Error; err != nil {
+	if err := r.DB.Preload("Tags").Preload("Author").First(&documentation, documentationId).Error; err != nil {
 		if err == gorm.ErrRecordNotFound {
 			return nil, fmt.Errorf("documentação não encontrada")
 		}
@@ -25,6 +25,7 @@ func (r *DocumentationRepository) FindDocumentationById(documentationId uint) (*
 		Content:   documentation.Content,
 		CreatedAt: documentation.CreatedAt,
 		UpdatedAt: documentation.UpdatedAt,
+		Tags:      documentation.Tags,
 		Author: userDTO.UserWithoutPasswordDTO{
 			Id:        documentation.Author.Id,
 			Name:      documentation.Author.Name,
