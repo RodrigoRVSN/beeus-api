@@ -12,4 +12,5 @@ type Documentation struct {
 	UpdatedAt time.Time `json:"updated_at"`
 	AuthorID  uint      `json:"author_id"`
 	Author    User      `gorm:"foreignKey:AuthorID;constraint:OnUpdate:CASCADE,OnDelete:SET NULL;"`
+	Tags      []Tag     `gorm:"many2many:documentation_tags;"`
 }

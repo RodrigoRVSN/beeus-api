@@ -8,11 +8,13 @@ import (
 type DocumentationUseCase struct {
 	DocumentationGateway gateway.DocumentationGateway
 	UserUseCase          gateway.UserGateway
+	TagRepository        gateway.TagGateway
 }
 
-func NewDocumentationUseCase(documentationGateway gateway.DocumentationGateway, userUseCase *userUseCase.UserUseCase) *DocumentationUseCase {
+func NewDocumentationUseCase(documentationGateway gateway.DocumentationGateway, userUseCase *userUseCase.UserUseCase, tagRepository gateway.TagGateway) *DocumentationUseCase {
 	return &DocumentationUseCase{
 		DocumentationGateway: documentationGateway,
 		UserUseCase:          userUseCase.UserGateway,
+		TagRepository:        tagRepository,
 	}
 }
