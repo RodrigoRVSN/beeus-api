@@ -6,7 +6,7 @@ import (
 	"github.com/rodrigoRVSN/beeus-api/src/domain/entity"
 )
 
-func (r *DocumentationRepository) CreateDocumentation(payload documentationDTO.CreateDocumentationInputDTO, user *userDTO.FindUserByIdOutputDTO) (*documentationDTO.CreateDocumentationOutputDTO, error) {
+func (r *DocumentationRepository) CreateDocumentation(payload documentationDTO.CreateDocumentationInputDTO, user *userDTO.FindUserByIdOutputDTO, tags []entity.Tag) (*documentationDTO.CreateDocumentationOutputDTO, error) {
 	documentation := entity.Documentation{
 		Title:    payload.Title,
 		Content:  payload.Content,
@@ -23,6 +23,7 @@ func (r *DocumentationRepository) CreateDocumentation(payload documentationDTO.C
 		Content:   documentation.Content,
 		CreatedAt: documentation.CreatedAt,
 		UpdatedAt: documentation.UpdatedAt,
+		Tags:      tags,
 		Author: userDTO.UserWithoutPasswordDTO{
 			Id:        user.Id,
 			Name:      user.Name,
