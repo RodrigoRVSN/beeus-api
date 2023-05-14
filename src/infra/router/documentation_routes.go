@@ -11,4 +11,5 @@ func DocumentationRoutes(app *fiber.App, documentationController *documentationC
 	app.Get("/documentation/:documentationId", documentationController.GetDocumentation)
 	app.Post("/documentation", middleware.AuthMiddleware, documentationController.CreateDocumentation)
 	app.Delete("/documentation/:documentationId", middleware.AuthMiddleware, documentationController.DeleteDocumentation)
+	app.Put("/documentation/:documentationId", middleware.AuthMiddleware, documentationController.EditDocumentation)
 }

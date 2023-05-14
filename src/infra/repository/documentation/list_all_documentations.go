@@ -9,7 +9,7 @@ import (
 func (r *DocumentationRepository) ListAllDocumentations() ([]documentationDTO.ListDocumentationsOutputDTO, error) {
 	documentations := []entity.Documentation{}
 
-	if err := r.DB.Preload("Author").Find(&documentations).Error; err != nil {
+	if err := r.DB.Preload("Tags").Preload("Author").Find(&documentations).Error; err != nil {
 		return nil, err
 	}
 
@@ -21,6 +21,7 @@ func (r *DocumentationRepository) ListAllDocumentations() ([]documentationDTO.Li
 			Content:   doc.Content,
 			CreatedAt: doc.CreatedAt,
 			UpdatedAt: doc.UpdatedAt,
+			Tags:      doc.Tags,
 			Author: userDTO.UserWithoutPasswordDTO{
 				Id:        doc.Author.Id,
 				Name:      doc.Author.Name,

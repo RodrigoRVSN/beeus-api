@@ -11,4 +11,5 @@ type DocumentationGateway interface {
 	ListAllDocumentations() ([]documentationDTO.ListDocumentationsOutputDTO, error)
 	DeleteDocumentation(documentation *documentationDTO.FindDocumentationByIdOutputDTO) error
 	FindDocumentationById(documentationId uint) (*documentationDTO.FindDocumentationByIdOutputDTO, error)
+	EditDocumentation(payload documentationDTO.EditDocumentationInputDTO, tags []entity.Tag, documentationID uint) (*documentationDTO.EditDocumentationOutputDTO, error)
 }

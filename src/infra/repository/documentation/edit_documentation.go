@@ -1,31 +1,34 @@
 package documentationRepository
 
 import (
-	"fmt"
-
 	documentationDTO "github.com/rodrigoRVSN/beeus-api/src/application/dto/documentation"
 	userDTO "github.com/rodrigoRVSN/beeus-api/src/application/dto/user"
 	"github.com/rodrigoRVSN/beeus-api/src/domain/entity"
-	"gorm.io/gorm"
 )
 
-func (r *DocumentationRepository) FindDocumentationById(documentationId uint) (*documentationDTO.FindDocumentationByIdOutputDTO, error) {
-	documentation := entity.Documentation{}
+func (r *DocumentationRepository) EditDocumentation(payload documentationDTO.EditDocumentationInputDTO, tags []entity.Tag, documentationID uint) (*documentationDTO.EditDocumentationOutputDTO, error) {
+	documentation := entity.Documentation{
+		Id:      documentationID,
+		Title:   payload.Title,
+		Content: payload.Content,
+		Tags:    tags,
+	}
 
-	if err := r.DB.Preload("Tags").Preload("Author").First(&documentation, documentationId).Error; err != nil {
-		if err == gorm.ErrRecordNotFound {
-			return nil, fmt.Errorf("documentação não encontrada")
-		}
+	if err := r.DB.Model(&documentation).Where("id = ?", documentationID).Updates(&documentation).Error; err != nil {
 		return nil, err
 	}
 
-	return &documentationDTO.FindDocumentationByIdOutputDTO{
-		Id:        documentation.Id,
+	if err := r.DB.Preload("Author").First(&documentation, documentationID).Error; err != nil {
+		return nil, err
+	}
+
+	return &documentationDTO.EditDocumentationOutputDTO{
+		Id:        documentationID,
 		Title:     documentation.Title,
 		Content:   documentation.Content,
 		CreatedAt: documentation.CreatedAt,
 		UpdatedAt: documentation.UpdatedAt,
-		Tags:      documentation.Tags,
+		Tags:      tags,
 		Author: userDTO.UserWithoutPasswordDTO{
 			Id:        documentation.Author.Id,
 			Name:      documentation.Author.Name,
