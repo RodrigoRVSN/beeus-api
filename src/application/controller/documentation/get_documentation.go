@@ -16,6 +16,7 @@ func (controller *DocumentationController) GetDocumentation(ctx context.Context)
 	}
 
 	documentation, err := controller.useCase.GetDocumentation(uint(documentationID))
+	
 	if err != nil {
 		return ctx.SendJson(fiber.StatusBadRequest, fiber.Map{"status": "fail", "message": err.Error()})
 	}

@@ -21,10 +21,7 @@ func (uc *DocumentationUseCase) CreateDocumentation(payload documentationDTO.Cre
 		}
 
 		if tag != nil {
-			tags[i] = entity.Tag{
-				Id:   tag.Id,
-				Name: tag.Name,
-			}
+			tags[i] = *entity.NewTag(tag.Id, tag.Name)
 			continue
 		}
 
@@ -34,10 +31,7 @@ func (uc *DocumentationUseCase) CreateDocumentation(payload documentationDTO.Cre
 			return nil, err
 		}
 
-		tags[i] = entity.Tag{
-			Id:   createdTag.Id,
-			Name: createdTag.Name,
-		}
+		tags[i] = *entity.NewTag(createdTag.Id, createdTag.Name)
 	}
 
 	documentation, err := uc.DocumentationGateway.CreateDocumentation(payload, user, tags)
