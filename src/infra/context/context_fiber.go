@@ -16,7 +16,7 @@ func (fc *FiberContext) GetMiddlewareParam(key string) interface{} {
 	return fc.Ctx.Locals(key)
 }
 
-func (fc *FiberContext) SetMiddlewareParam(key string, value string) interface{} {
+func (fc *FiberContext) SetMiddlewareParam(key string, value interface{}) interface{} {
 	return fc.Ctx.Locals(key, value)
 }
 
@@ -26,6 +26,14 @@ func (fc *FiberContext) SendJson(status int, json interface{}) error {
 
 func (fc *FiberContext) ParseBody(payload interface{}) error {
 	return fc.Ctx.BodyParser(payload)
+}
+
+func (fc *FiberContext) GetHeader(key string) string {
+	return fc.Ctx.Get(key)
+}
+
+func (fc *FiberContext) Next() error {
+	return fc.Ctx.Next()
 }
 
 func AdaptHandler(handler func(Context) error) func(*fiber.Ctx) error {

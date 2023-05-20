@@ -9,8 +9,12 @@ import (
 
 func DocumentationRoutes(app *fiber.App, documentationController *documentationController.DocumentationController) {
 	app.Get("/documentation", context.AdaptHandler(documentationController.ListAllDocumentations))
-	app.Get("/documentation/:documentationId", middleware.AuthMiddleware, context.AdaptHandler(documentationController.GetDocumentation))
-	app.Post("/documentation", middleware.AuthMiddleware, context.AdaptHandler(documentationController.CreateDocumentation))
-	app.Delete("/documentation/:documentationId", middleware.AuthMiddleware, context.AdaptHandler(documentationController.DeleteDocumentation))
-	app.Put("/documentation/:documentationId", middleware.AuthMiddleware, context.AdaptHandler(documentationController.EditDocumentation))
+
+	app.Get("/documentation/:documentationId", context.AdaptHandler(middleware.AuthMiddleware), context.AdaptHandler(documentationController.GetDocumentation))
+
+	app.Post("/documentation", context.AdaptHandler(middleware.AuthMiddleware), context.AdaptHandler(documentationController.CreateDocumentation))
+
+	app.Delete("/documentation/:documentationId", context.AdaptHandler(middleware.AuthMiddleware), context.AdaptHandler(documentationController.DeleteDocumentation))
+
+	app.Put("/documentation/:documentationId", context.AdaptHandler(middleware.AuthMiddleware), context.AdaptHandler(documentationController.EditDocumentation))
 }
