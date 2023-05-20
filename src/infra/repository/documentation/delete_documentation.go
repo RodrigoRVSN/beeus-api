@@ -6,7 +6,15 @@ import (
 )
 
 func (r *DocumentationRepository) DeleteDocumentation(documentation *documentationDTO.FindDocumentationByIdOutputDTO) error {
-	err := r.DB.Delete(&entity.Documentation{}, documentation.Id).Error
+	doc := entity.Documentation{Id: documentation.Id}
 
-	return err
+	if err := r.DB.Model(&doc).Association("Tags").Clear(); err != nil {
+		return err
+	}
+
+	if err := r.DB.Delete(&doc).Error; err != nil {
+		return err
+	}
+
+	return nil
 }
