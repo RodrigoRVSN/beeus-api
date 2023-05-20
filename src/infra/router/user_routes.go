@@ -13,5 +13,5 @@ func UserRoutes(app *fiber.App, userController *userController.UserController) {
 	app.Post("/auth/login", context.AdaptHandler(userController.SignInUser))
 	app.Post("/auth/register", context.AdaptHandler(userController.CreateUser))
 
-	app.Get("/user/me", middleware.AuthMiddleware, context.AdaptHandler(userController.Me))
+	app.Get("/user/me", context.AdaptHandler(middleware.AuthMiddleware), context.AdaptHandler(userController.Me))
 }

@@ -6,6 +6,7 @@ import (
 
 	"github.com/gofiber/fiber/v2"
 	"github.com/golang-jwt/jwt"
+	"github.com/rodrigoRVSN/beeus-api/src/infra/context"
 )
 
 type CustomClaims struct {
@@ -13,11 +14,11 @@ type CustomClaims struct {
 	UserId uint `json:"sub"`
 }
 
-func AuthMiddleware(c *fiber.Ctx) error {
-	token := c.Get("Authorization")
+func AuthMiddleware(ctx context.Context) error {
+	token := ctx.GetHeader("Authorization")
 
 	if token == "" {
-		return c.Status(fiber.StatusUnauthorized).JSON(fiber.Map{
+		return ctx.SendJson(fiber.StatusUnauthorized, fiber.Map{
 			"message": "Token de autenticação ausente",
 		})
 	}
@@ -30,12 +31,12 @@ func AuthMiddleware(c *fiber.Ctx) error {
 	})
 
 	if err != nil {
-		return c.Status(fiber.StatusUnauthorized).JSON(fiber.Map{
+		return ctx.SendJson(fiber.StatusUnauthorized, fiber.Map{
 			"message": "Token de autenticação inválido",
 		})
 	}
 
-	c.Locals("userId", claims.UserId)
+	ctx.SetMiddlewareParam("userId", claims.UserId)
 
-	return c.Next()
+	return ctx.Next()
 }

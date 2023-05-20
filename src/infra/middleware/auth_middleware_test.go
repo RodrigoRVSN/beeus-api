@@ -6,13 +6,14 @@ import (
 	"testing"
 
 	"github.com/gofiber/fiber/v2"
+	"github.com/rodrigoRVSN/beeus-api/src/infra/context"
 	"github.com/rodrigoRVSN/beeus-api/src/infra/service"
 )
 
 func TestAuthMiddleware(t *testing.T) {
 	app := fiber.New()
 
-	app.Get("/protected", AuthMiddleware, func(c *fiber.Ctx) error {
+	app.Get("/protected", context.AdaptHandler(AuthMiddleware), func(c *fiber.Ctx) error {
 		return c.SendString("Success")
 	})
 
