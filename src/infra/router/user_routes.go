@@ -3,15 +3,15 @@ package routes
 import (
 	"github.com/gofiber/fiber/v2"
 	userController "github.com/rodrigoRVSN/beeus-api/src/application/controller/user"
+	"github.com/rodrigoRVSN/beeus-api/src/infra/context"
 	"github.com/rodrigoRVSN/beeus-api/src/infra/middleware"
 )
 
 func UserRoutes(app *fiber.App, userController *userController.UserController) {
-	app.Get("/users", userController.FindAllUsers)
+	app.Get("/users", context.AdaptHandler(userController.FindAllUsers))
 
-	app.Post("/auth/login", userController.SignInUser)
-	app.Post("/auth/register", userController.CreateUser)
+	app.Post("/auth/login", context.AdaptHandler(userController.SignInUser))
+	app.Post("/auth/register", context.AdaptHandler(userController.CreateUser))
 
-	authRoutes := app.Group("/user", middleware.AuthMiddleware)
-	authRoutes.Get("/me", userController.Me)
+	app.Get("/user/me", middleware.AuthMiddleware, context.AdaptHandler(userController.Me))
 }
