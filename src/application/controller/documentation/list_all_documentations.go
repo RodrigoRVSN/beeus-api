@@ -2,14 +2,15 @@ package documentationController
 
 import (
 	"github.com/gofiber/fiber/v2"
+	"github.com/rodrigoRVSN/beeus-api/src/infra/context"
 )
 
-func (controller *DocumentationController) ListAllDocumentations(context *fiber.Ctx) error {
+func (controller *DocumentationController) ListAllDocumentations(ctx context.Context) error {
 	documentations, err := controller.useCase.ListAllDocumentations()
 
 	if err != nil {
-		return context.Status(fiber.StatusBadRequest).JSON(err)
+		return ctx.SendJson(fiber.StatusBadRequest, err)
 	}
 
-	return context.Status(fiber.StatusOK).JSON(documentations)
+	return ctx.SendJson(fiber.StatusOK, documentations)
 }

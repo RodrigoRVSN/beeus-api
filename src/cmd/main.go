@@ -10,6 +10,7 @@ import (
 	documentationUseCase "github.com/rodrigoRVSN/beeus-api/src/application/use_case/documentation"
 	userUseCase "github.com/rodrigoRVSN/beeus-api/src/application/use_case/user"
 	"github.com/rodrigoRVSN/beeus-api/src/config"
+	"github.com/rodrigoRVSN/beeus-api/src/infra/context"
 	documentationRepository "github.com/rodrigoRVSN/beeus-api/src/infra/repository/documentation"
 	tagRepository "github.com/rodrigoRVSN/beeus-api/src/infra/repository/tag"
 	userRepository "github.com/rodrigoRVSN/beeus-api/src/infra/repository/user"
@@ -18,6 +19,10 @@ import (
 
 func main() {
 	app := fiber.New()
+	app.Use(func(ctx *fiber.Ctx) error {
+		context.NewFiberContext(ctx)
+		return ctx.Next()
+	})
 
 	config.LoadEnv()
 	db := config.ConnectDb()
