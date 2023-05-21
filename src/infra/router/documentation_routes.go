@@ -8,13 +8,15 @@ import (
 )
 
 func DocumentationRoutes(app *fiber.App, documentationController documentationController.DocumentationControllerInterface) {
-	app.Get("/documentation", context.AdaptHandler(documentationController.ListAllDocumentations))
+	docRoutes := app.Group("/documentation")
 
-	app.Get("/documentation/:documentationId", context.AdaptHandler(middleware.AuthMiddleware), context.AdaptHandler(documentationController.GetDocumentation))
+	docRoutes.Get("", context.AdaptHandler(documentationController.ListAllDocumentations))
 
-	app.Post("/documentation", context.AdaptHandler(middleware.AuthMiddleware), context.AdaptHandler(documentationController.CreateDocumentation))
+	docRoutes.Get("/:documentationId", context.AdaptHandler(middleware.AuthMiddleware), context.AdaptHandler(documentationController.GetDocumentation))
 
-	app.Delete("/documentation/:documentationId", context.AdaptHandler(middleware.AuthMiddleware), context.AdaptHandler(documentationController.DeleteDocumentation))
+	docRoutes.Post("", context.AdaptHandler(middleware.AuthMiddleware), context.AdaptHandler(documentationController.CreateDocumentation))
 
-	app.Put("/documentation/:documentationId", context.AdaptHandler(middleware.AuthMiddleware), context.AdaptHandler(documentationController.EditDocumentation))
+	docRoutes.Delete("/:documentationId", context.AdaptHandler(middleware.AuthMiddleware), context.AdaptHandler(documentationController.DeleteDocumentation))
+
+	docRoutes.Put("/:documentationId", context.AdaptHandler(middleware.AuthMiddleware), context.AdaptHandler(documentationController.EditDocumentation))
 }
