@@ -5,51 +5,48 @@
 ![GitHub repo size](https://img.shields.io/github/repo-size/rodrigorvsn/beeus-api?style=for-the-badge)
 ![GitHub language count](https://img.shields.io/github/languages/count/rodrigorvsn/beeus-api?style=for-the-badge)
 ![GitHub forks](https://img.shields.io/github/forks/rodrigorvsn/beeus-api?style=for-the-badge)
-![Bitbucket open issues](https://img.shields.io/bitbucket/issues/rodrigorvsn/beeus-api?style=for-the-badge)
-![Bitbucket open pull requests](https://img.shields.io/bitbucket/pr-raw/rodrigorvsn/beeus-api?style=for-the-badge)
 
 ___
 <!--- #################### mudar badges #################### --->
 
 - Database ERD
 
-![image](https://user-images.githubusercontent.com/75763403/227735098-709815a6-3b96-4f07-bee6-8a555de5b349.png)
+![image](https://github.com/RodrigoRVSN/beeus-api/assets/75763403/7ef0ec01-4cba-4fb8-8e1e-27144ac4c410)
 
-- Fluxogram
-> todo
 
 <!--- #################### mudar imagem exemplo #################### --->
 ___
 
-> This is the API from Beeus.
+This is the API being used in [Beeus](https://github.com/william-james-pj/beeus).
+
+![image](https://github.com/RodrigoRVSN/beeus-api/assets/75763403/47781665-2dfa-4e2d-8587-d07ad25b8e56)
 
 ___
 ## 💻 Prerequisites
 
-- Have docker and docker compose installed or just the Go Cli
+- Have [docker](https://www.docker.com/) and [docker compose](https://docs.docker.com/compose/) installed or just the [Go cli](https://go.dev/doc/install)
 
 <!--- #################### mudar pré-requisitos  ####################--->
 ___
 ## 🛠 Tools used
 
-- Golang
-- GORM
-- Fiber
-- Docker
-- PostgreSQL
-- Render (Deploy server)
-- ElephantSQL (Deploy PostgreSQL database)
-- _Maybe_ Swagger, Terraform, Redis and OAuth 2
+- [Golang](https://go.dev/): Programming language
+- [GORM](https://gorm.io/): ORM
+- [Fiber](https://gofiber.io/): Go framework
+- [Docker](https://www.docker.com/): Run application in container
+- [PostgreSQL](https://www.postgresql.org/): Relational database
+- [Render](https://render.com/): Deploy server
+- [ElephantSQL](https://www.elephantsql.com/): Deploy PostgreSQL database
 
 <!--- #################### mudar ferramentas #################### --->
 ___
-## 🚀 Installing beeus-api
+## 🚀 Running beeus-api
 
-To use, follow the steps:
+To run this application, follow the steps:
 
-1. Fill the `.env` with the `.env.example` info.
+1. Create and fill a `.env` fill with the information provided in `.env.example`.
 
-2. Build the server and database images to run the application of `docker-compose.yaml`
+2. Build and run the database and application configured in `docker-compose.yaml`, using:
 
 ```bash
 docker compose up
@@ -57,6 +54,10 @@ docker compose up
 
 3. Run all tests of the project recursively 
 
+```bash
+docker compose up test
+```
+_or if you have the Go CLI installed_
 ```bash
 go test ./...
 ```
