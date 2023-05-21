@@ -7,7 +7,7 @@ import (
 	"github.com/rodrigoRVSN/beeus-api/src/infra/middleware"
 )
 
-func DocumentationRoutes(app *fiber.App, documentationController *documentationController.DocumentationController) {
+func DocumentationRoutes(app *fiber.App, documentationController documentationController.DocumentationControllerInterface) {
 	app.Get("/documentation", context.AdaptHandler(documentationController.ListAllDocumentations))
 
 	app.Get("/documentation/:documentationId", context.AdaptHandler(middleware.AuthMiddleware), context.AdaptHandler(documentationController.GetDocumentation))

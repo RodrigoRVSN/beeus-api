@@ -6,7 +6,7 @@ import (
 )
 
 func (uc *DocumentationUseCase) CreateDocumentation(payload documentationDTO.CreateDocumentationInputDTO, userID uint) (*documentationDTO.CreateDocumentationOutputDTO, error) {
-	user, userWasNotFound := uc.UserUseCase.GetUserById(userID)
+	user, userWasNotFound := uc.UserGateway.GetUserById(userID)
 
 	if userWasNotFound != nil {
 		return nil, userWasNotFound
@@ -14,7 +14,7 @@ func (uc *DocumentationUseCase) CreateDocumentation(payload documentationDTO.Cre
 
 	tags := make([]entity.Tag, len(payload.Tags))
 	for i, actualTag := range payload.Tags {
-		tag, err := uc.TagRepository.FindTagByName(actualTag)
+		tag, err := uc.TagGateway.FindTagByName(actualTag)
 
 		if err != nil {
 			return nil, err
@@ -25,7 +25,7 @@ func (uc *DocumentationUseCase) CreateDocumentation(payload documentationDTO.Cre
 			continue
 		}
 
-		createdTag, createdError := uc.TagRepository.CreateTag(actualTag)
+		createdTag, createdError := uc.TagGateway.CreateTag(actualTag)
 
 		if createdError != nil {
 			return nil, err

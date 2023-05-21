@@ -7,7 +7,7 @@ import (
 	"github.com/rodrigoRVSN/beeus-api/src/infra/middleware"
 )
 
-func UserRoutes(app *fiber.App, userController *userController.UserController) {
+func UserRoutes(app *fiber.App, userController userController.UserControllerInterface) {
 	app.Get("/users", context.AdaptHandler(userController.FindAllUsers))
 
 	app.Post("/auth/login", context.AdaptHandler(userController.SignInUser))

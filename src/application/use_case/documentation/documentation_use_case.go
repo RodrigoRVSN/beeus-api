@@ -1,20 +1,28 @@
 package documentationUseCase
 
 import (
-	userUseCase "github.com/rodrigoRVSN/beeus-api/src/application/use_case/user"
+	documentationDTO "github.com/rodrigoRVSN/beeus-api/src/application/dto/documentation"
 	"github.com/rodrigoRVSN/beeus-api/src/domain/gateway"
 )
 
-type DocumentationUseCase struct {
-	DocumentationGateway gateway.DocumentationGateway
-	UserUseCase          gateway.UserGateway
-	TagRepository        gateway.TagGateway
+type UserControllerInterface interface {
+	CreateDocumentation(payload documentationDTO.CreateDocumentationInputDTO, userID uint) (*documentationDTO.CreateDocumentationOutputDTO, error)
+	ListAllDocumentations() ([]documentationDTO.ListDocumentationsOutputDTO, error)
+	GetDocumentation(documentationID uint) (*documentationDTO.FindDocumentationByIdOutputDTO, error)
+	EditDocumentation(payload documentationDTO.EditDocumentationInputDTO, documentationID uint) (*documentationDTO.EditDocumentationOutputDTO, error)
+	DeleteDocumentation(documentationID uint) error
 }
 
-func NewDocumentationUseCase(documentationGateway gateway.DocumentationGateway, userUseCase *userUseCase.UserUseCase, tagRepository gateway.TagGateway) *DocumentationUseCase {
+type DocumentationUseCase struct {
+	DocumentationGateway gateway.DocumentationGateway
+	UserGateway          gateway.UserGateway
+	TagGateway           gateway.TagGateway
+}
+
+func NewDocumentationUseCase(documentationGateway gateway.DocumentationGateway, userGateway gateway.UserGateway, tagGateway gateway.TagGateway) UserControllerInterface {
 	return &DocumentationUseCase{
 		DocumentationGateway: documentationGateway,
-		UserUseCase:          userUseCase.UserGateway,
-		TagRepository:        tagRepository,
+		UserGateway:          userGateway,
+		TagGateway:           tagGateway,
 	}
 }

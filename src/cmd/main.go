@@ -31,11 +31,11 @@ func main() {
 
 	userRepository := userRepository.NewUserRepository(db)
 	userUseCase := userUseCase.NewUserUseCase(userRepository)
-	userController := userController.NewUserController(*userUseCase)
+	userController := userController.NewUserController(userUseCase)
 
 	documentationRepository := documentationRepository.NewDocumentationRepository(db)
-	documentationUseCase := documentationUseCase.NewDocumentationUseCase(documentationRepository, userUseCase, tagRepository)
-	documentationController := documentationController.NewDocumentationController(*documentationUseCase)
+	documentationUseCase := documentationUseCase.NewDocumentationUseCase(documentationRepository, userRepository, tagRepository)
+	documentationController := documentationController.NewDocumentationController(documentationUseCase)
 
 	app.Use(cors.New())
 	routes.UserRoutes(app, userController)

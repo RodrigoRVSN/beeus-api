@@ -14,16 +14,17 @@ func (r *UserRepository) SignInUser(payload userDTO.SignInInputDTO) (*userDTO.Si
 	user := entity.User{}
 
 	email := strings.ToLower(payload.Email)
-	userFound := r.DB.First(&user, "email = ?", email).Error
+	err := r.DB.First(&user, "email = ?", email).Error
+	if err != nil {
+		return nil, fmt.Errorf("email ou senha incorretos")
+	}
 
 	isPasswordCorrect := hash.CheckPasswordHash(payload.Password, user.Password)
-
-	if userFound != nil || !isPasswordCorrect {
+	if !isPasswordCorrect {
 		return nil, fmt.Errorf("email ou senha incorretos")
 	}
 
 	tokenString, err := service.CreateJwtToken(user.Id)
-
 	if err != nil {
 		return nil, fmt.Errorf("erro ao gerar token")
 	}
