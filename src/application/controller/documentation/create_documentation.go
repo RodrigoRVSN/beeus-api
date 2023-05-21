@@ -8,8 +8,7 @@ import (
 )
 
 func (controller *DocumentationController) CreateDocumentation(ctx context.Context) error {
-	userID := ctx.GetMiddlewareParam("userId")
-	test := userID.(uint)
+	userID := ctx.GetMiddlewareParam("userId").(uint)
 	payload := new(documentationDTO.CreateDocumentationInputDTO)
 
 	if err := ctx.ParseBody(&payload); err != nil {
@@ -22,7 +21,7 @@ func (controller *DocumentationController) CreateDocumentation(ctx context.Conte
 		return ctx.SendJson(fiber.StatusBadRequest, errors)
 	}
 
-	documentation, err := controller.useCase.CreateDocumentation(*payload, test)
+	documentation, err := controller.useCase.CreateDocumentation(*payload, userID)
 
 	if err != nil {
 		return ctx.SendJson(fiber.StatusBadRequest, fiber.Map{"status": "fail", "message": err.Error()})
