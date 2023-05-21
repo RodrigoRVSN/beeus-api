@@ -9,7 +9,6 @@ type UserControllerInterface interface {
 	CreateUser(ctx context.Context) error
 	SignInUser(ctx context.Context) error
 	Me(ctx context.Context) error
-	FindAllUsers(ctx context.Context) error
 }
 
 type UserController struct {
