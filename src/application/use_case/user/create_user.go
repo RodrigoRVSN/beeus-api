@@ -1,11 +1,11 @@
 package userUseCase
 
 import (
-	"github.com/rodrigoRVSN/beeus-api/src/application/dto/user"
+	userDTO "github.com/rodrigoRVSN/beeus-api/src/application/dto/user"
 )
 
 func (uc *UserUseCase) CreateUser(payload userDTO.SignUpInputDTO) error {
-	userWasFound := uc.UserGateway.CheckIfUserAlreadyExists(payload.Email)
+	userWasFound := uc.UserGateway.GetUserByEmail(payload.Email)
 
 	if userWasFound != nil {
 		return userWasFound
