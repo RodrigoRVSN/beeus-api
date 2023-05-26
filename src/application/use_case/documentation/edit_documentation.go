@@ -8,7 +8,7 @@ import (
 func (uc *DocumentationUseCase) EditDocumentation(payload documentationDTO.EditDocumentationInputDTO, documentationID uint) (*documentationDTO.EditDocumentationOutputDTO, error) {
 	tags := make([]entity.Tag, len(payload.Tags))
 	for i, actualTag := range payload.Tags {
-		tag, err := uc.TagRepository.FindTagByName(actualTag)
+		tag, err := uc.TagGateway.FindTagByName(actualTag)
 
 		if err != nil {
 			return nil, err
@@ -19,7 +19,7 @@ func (uc *DocumentationUseCase) EditDocumentation(payload documentationDTO.EditD
 			continue
 		}
 
-		createdTag, createdError := uc.TagRepository.CreateTag(actualTag)
+		createdTag, createdError := uc.TagGateway.CreateTag(actualTag)
 
 		if createdError != nil {
 			return nil, err

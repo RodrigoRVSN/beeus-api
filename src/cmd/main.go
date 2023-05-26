@@ -5,15 +5,9 @@ import (
 
 	"github.com/gofiber/fiber/v2"
 	"github.com/gofiber/fiber/v2/middleware/cors"
-	documentationController "github.com/rodrigoRVSN/beeus-api/src/application/controller/documentation"
-	userController "github.com/rodrigoRVSN/beeus-api/src/application/controller/user"
-	documentationUseCase "github.com/rodrigoRVSN/beeus-api/src/application/use_case/documentation"
-	userUseCase "github.com/rodrigoRVSN/beeus-api/src/application/use_case/user"
 	"github.com/rodrigoRVSN/beeus-api/src/config"
+	"github.com/rodrigoRVSN/beeus-api/src/infra/container"
 	"github.com/rodrigoRVSN/beeus-api/src/infra/context"
-	documentationRepository "github.com/rodrigoRVSN/beeus-api/src/infra/repository/documentation"
-	tagRepository "github.com/rodrigoRVSN/beeus-api/src/infra/repository/tag"
-	userRepository "github.com/rodrigoRVSN/beeus-api/src/infra/repository/user"
 	routes "github.com/rodrigoRVSN/beeus-api/src/infra/router"
 )
 
@@ -25,21 +19,11 @@ func main() {
 	})
 
 	config.LoadEnv()
-	db := config.ConnectDb()
 
-	tagRepository := tagRepository.NewTagRepository(db)
-
-	userRepository := userRepository.NewUserRepository(db)
-	userUseCase := userUseCase.NewUserUseCase(userRepository)
-	userController := userController.NewUserController(*userUseCase)
-
-	documentationRepository := documentationRepository.NewDocumentationRepository(db)
-	documentationUseCase := documentationUseCase.NewDocumentationUseCase(documentationRepository, userUseCase, tagRepository)
-	documentationController := documentationController.NewDocumentationController(*documentationUseCase)
+	container := container.InitializeContainer()
 
 	app.Use(cors.New())
-	routes.UserRoutes(app, userController)
-	routes.DocumentationRoutes(app, documentationController)
+	routes.SetupRoutes(app, container)
 
 	app.Listen(":" + os.Getenv("PORT"))
 }
