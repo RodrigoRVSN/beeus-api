@@ -26,13 +26,6 @@ func (r *DocumentationRepository) FindDocumentationById(documentationId uint) (*
 		CreatedAt: documentation.CreatedAt,
 		UpdatedAt: documentation.UpdatedAt,
 		Tags:      documentation.Tags,
-		Author: userDTO.UserWithoutPasswordDTO{
-			Id:        documentation.Author.Id,
-			Name:      documentation.Author.Name,
-			Email:     documentation.Author.Email,
-			AvatarUrl: documentation.Author.AvatarUrl,
-			Points:    documentation.Author.Points,
-			CreatedAt: documentation.Author.CreatedAt,
-		},
+		Author:    userDTO.MapUserWithoutPasswordToDTO(documentation.Author),
 	}, nil
 }

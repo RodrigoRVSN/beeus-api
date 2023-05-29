@@ -1,15 +1,22 @@
 package userRepository
 
-import "github.com/rodrigoRVSN/beeus-api/src/domain/entity"
+import (
+	userDTO "github.com/rodrigoRVSN/beeus-api/src/application/dto/user"
+	"github.com/rodrigoRVSN/beeus-api/src/domain/entity"
+)
 
-func (r *UserRepository) FindAllUsers(user *entity.User) ([]entity.User, error) {
-	users := []entity.User{}
+func (r *UserRepository) FindAllUsers(sortBy string, sortOrder string) (*[]userDTO.UserWithoutPasswordDTO, error) {
+	rankedUsers := []entity.User{}
 
-	response := r.DB.Find(&users)
-
-	if response.Error != nil {
-		return nil, response.Error
+	query := r.DB.Order(sortBy + " " + sortOrder).Find(&rankedUsers)
+	if query.Error != nil {
+		return nil, query.Error
 	}
 
-	return users, nil
+	userDTOs := make([]userDTO.UserWithoutPasswordDTO, len(rankedUsers))
+	for i, user := range rankedUsers {
+		userDTOs[i] = userDTO.MapUserWithoutPasswordToDTO(user)
+	}
+
+	return &userDTOs, nil
 }

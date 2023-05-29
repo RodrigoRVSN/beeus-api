@@ -22,14 +22,7 @@ func (r *DocumentationRepository) ListAllDocumentations() ([]documentationDTO.Li
 			CreatedAt: doc.CreatedAt,
 			UpdatedAt: doc.UpdatedAt,
 			Tags:      doc.Tags,
-			Author: userDTO.UserWithoutPasswordDTO{
-				Id:        doc.Author.Id,
-				Name:      doc.Author.Name,
-				Email:     doc.Author.Email,
-				AvatarUrl: doc.Author.AvatarUrl,
-				Points:    doc.Author.Points,
-				CreatedAt: doc.Author.CreatedAt,
-			},
+			Author:    userDTO.MapUserWithoutPasswordToDTO(doc.Author),
 		}
 	}
 
