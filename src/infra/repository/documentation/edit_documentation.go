@@ -29,13 +29,6 @@ func (r *DocumentationRepository) EditDocumentation(payload documentationDTO.Edi
 		CreatedAt: documentation.CreatedAt,
 		UpdatedAt: documentation.UpdatedAt,
 		Tags:      tags,
-		Author: userDTO.UserWithoutPasswordDTO{
-			Id:        documentation.Author.Id,
-			Name:      documentation.Author.Name,
-			Email:     documentation.Author.Email,
-			AvatarUrl: documentation.Author.AvatarUrl,
-			Points:    documentation.Author.Points,
-			CreatedAt: documentation.Author.CreatedAt,
-		},
+		Author:    userDTO.MapUserWithoutPasswordToDTO(documentation.Author),
 	}, nil
 }

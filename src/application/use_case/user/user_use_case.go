@@ -9,6 +9,7 @@ type UserControllerInterface interface {
 	CreateUser(payload userDTO.SignUpInputDTO) error
 	SignInUser(payload userDTO.SignInInputDTO) (*userDTO.SignInOutputDTO, error)
 	Me(userId uint) (*userDTO.FindUserByIdOutputDTO, error)
+	GetRankedUsers() (*[]userDTO.UserWithoutPasswordDTO, error)
 }
 
 type UserUseCase struct {

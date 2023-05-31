@@ -12,4 +12,6 @@ func UserRoutes(app *fiber.App, userController userController.UserControllerInte
 	app.Post("/auth/register", context.AdaptHandler(userController.CreateUser))
 
 	app.Get("/user/me", context.AdaptHandler(middleware.AuthMiddleware), context.AdaptHandler(userController.Me))
+
+	app.Get("/users/ranking", context.AdaptHandler(middleware.AuthMiddleware), context.AdaptHandler(userController.GetRankedUsers))
 }
