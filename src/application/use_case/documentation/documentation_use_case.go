@@ -5,7 +5,7 @@ import (
 	"github.com/rodrigoRVSN/beeus-api/src/domain/gateway"
 )
 
-type UserControllerInterface interface {
+type DocumentationUseCaseInterface interface {
 	CreateDocumentation(payload documentationDTO.CreateDocumentationInputDTO, userID uint) (*documentationDTO.CreateDocumentationOutputDTO, error)
 	ListAllDocumentations() ([]documentationDTO.ListDocumentationsOutputDTO, error)
 	GetDocumentation(documentationID uint) (*documentationDTO.FindDocumentationByIdOutputDTO, error)
@@ -19,7 +19,7 @@ type DocumentationUseCase struct {
 	TagGateway           gateway.TagGateway
 }
 
-func NewDocumentationUseCase(documentationGateway gateway.DocumentationGateway, userGateway gateway.UserGateway, tagGateway gateway.TagGateway) UserControllerInterface {
+func NewDocumentationUseCase(documentationGateway gateway.DocumentationGateway, userGateway gateway.UserGateway, tagGateway gateway.TagGateway) DocumentationUseCaseInterface {
 	return &DocumentationUseCase{
 		DocumentationGateway: documentationGateway,
 		UserGateway:          userGateway,

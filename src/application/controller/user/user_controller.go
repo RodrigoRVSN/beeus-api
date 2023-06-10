@@ -13,10 +13,10 @@ type UserControllerInterface interface {
 }
 
 type UserController struct {
-	useCase userUseCase.UserControllerInterface
+	useCase userUseCase.UserUseCaseInterface
 }
 
-func NewUserController(useCase userUseCase.UserControllerInterface) UserControllerInterface {
+func NewUserController(useCase userUseCase.UserUseCaseInterface) UserControllerInterface {
 	return &UserController{
 		useCase: useCase,
 	}
