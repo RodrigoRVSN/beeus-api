@@ -52,7 +52,10 @@ To run this application, follow the steps:
 docker compose up
 ```
 
-3. Run all tests of the project recursively 
+3. Done! You can see the documentation of routes in the Insomnia in `./docs/routes-beeus-api-insomnia.json`
+
+## 🧪 Testing
+Run all tests of the project recursively 
 
 ```bash
 docker compose up test
