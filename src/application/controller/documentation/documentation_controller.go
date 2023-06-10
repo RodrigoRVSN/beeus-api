@@ -14,10 +14,10 @@ type DocumentationControllerInterface interface {
 }
 
 type DocumentationController struct {
-	useCase documentationUseCase.UserControllerInterface
+	useCase documentationUseCase.DocumentationUseCaseInterface
 }
 
-func NewDocumentationController(useCase documentationUseCase.UserControllerInterface) DocumentationControllerInterface {
+func NewDocumentationController(useCase documentationUseCase.DocumentationUseCaseInterface) DocumentationControllerInterface {
 	return &DocumentationController{
 		useCase: useCase,
 	}
