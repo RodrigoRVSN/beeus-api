@@ -65,9 +65,67 @@ _or if you have the Go CLI installed_
 go test ./...
 ```
 
+## ✍️Annotations
+
+- [x]  **SOLID**
+    - [x]  **S (SRP - Single Responsibility Principle)**
+        
+        > Uma classe deveria fazer apenas uma coisa e deveria ter apenas um motivo para ser modificada
+        > 
+        - [x]  Camada `repository` tem apenas uma responsabilidade: acesso ao banco de dados.
+    - [x]  **O (OCP - Open–Closed Principle)**
+        
+        > Deve ser possível extender  o comportamento de uma classe sem modificá-la.
+        > 
+        - [x]  `DTOs` aplicando o `DTO` do usuário sem senha. Isso permite adicionar informações sobre o autor sem necessariamente mudar o `DTO` que está utilizando a implementação desse `DTO` de usuário sem senha
+    - [x]  **L (LSP - Liskov Substitution Principle)**
+        
+        > Subclasses deveriam ser substituíveis pelas classes base.
+        > 
+        - [x]  `DocumentationControllerInterface` define os métodos implementados pelo `controller` de documentações. Novas subclasses seguiriam a mesma assinatura.
+    - [x]  **I (ISP - Interface Segregation Principle)**
+        
+        > A classe não deveria ser forçada a implementar interfaces e métodos que não vão ser usados.
+        > 
+        - [x]  Interface de `gateway` utilizada no `repository` e no `use case`
+    - [x]  **D (DIP - Dependency Inversion Principle)**
+        
+        > Dependa de abstrações, não implementações
+        > 
+        - [x]  Ao implementar a interface `gateway` , deixamos expostos métodos abstratos providos pela interface ao invés de uma implementação direta. Caso algo da camada repository mudasse, alteraríamos a implementação dela apenas.
+- [x]  Design Patterns
+    - [x]  Strategy
+        - [x]  A interface **`DocumentationUseCaseInterface` declara os métodos do `use case` e contém a lógica de cada implementação. Com isso, os métodos da camada `controller` podem chamar os métodos do `use case` em tempo de execução, sem conhecer a implementação específica dele.**
+    - [x]  Adapters
+        - [x]  Utilização de `DTOs` para retornar os dados específicos esperados daquele `repository`
+    - [x]  Factory
+        - [x]  Implementação da criação de uma entidade `Tag`
+
+---
+
+# Arquitetura de Software
+
+- [x]  Arquitetura utilizada
+    - [x]  **Clean Architecture** + um pouco de Hexagonal
+- [x]  Apresentação da abordagem de Clean Architecture
+    - [x]  Acoplamento
+        - [x]  Main
+        - [x]  Controller
+        - [x]  Use case
+        - [x]  Repository
+        - [x]  DTOs
+    - [x]  Reuso e manutenibilidade
+        - [x]  Utilização de SOLID e implementação de interfaces
+- [x]  DDD
+    - [x]  Domínio: entity e gateway
+    - [x]  Application: DTOs, useCases e controllers
+    - [x]  Infra: database, rotas
+    - [x]  Linguagem ubíqua (específico por entidades)
+    - [x]  Repositórios (acesso direto a camada de infra via injeção de dependência)
+
 ## 📫 Contribuiting with beeus-api
 
-To contribue with beeus-api, follow the steps:
+To contribute to beeus-api, follow the steps:
 
 1. Fork this repository.
 2. Create a branch: `git checkout -b <name_branch>`.
